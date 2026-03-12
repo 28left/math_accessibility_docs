@@ -9,7 +9,9 @@ website:
       - href: index.qmd
         text: Home
       - href: general.qmd
-        text: General Principles  
+        text: General Principles
+      - href: tagged-pdf.qmd
+        text: Tagged PDFs
       - about.qmd
 
 format:

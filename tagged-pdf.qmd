@@ -1,0 +1,135 @@
+# Creating Tagged PDFs from LaTeX
+
+Tagged PDFs contain structural and semantic information that makes them accessible to screen readers and other assistive technologies. This page explains the changes needed to compile an existing LaTeX file as a tagged PDF using `lualatex`.
+
+::: {.callout-note}
+Tagged PDF support requires compiling with **`lualatex`** (not `pdflatex` or `xelatex`).
+:::
+
+## 1. Add Document Metadata
+
+At the very **top of the file** — before `\documentclass` — add the following block:
+
+```latex
+\DocumentMetadata{
+    tagging=on,
+    pdfstandard=ua-2,
+    lang=en,
+    tagging-setup = {math/setup=mathml-SE}
+}
+\tagpdfsetup{math/alt/use}
+```
+
+This enables tagging, sets the PDF/UA-2 accessibility standard, declares the document language, and configures math tagging via MathML.
+
+## 2. Load `unicode-math`
+
+Immediately after the `\documentclass{...}` line, add:
+
+```latex
+\usepackage{unicode-math}
+```
+
+This package is required for proper math tagging with `lualatex`.
+
+## 3. Add a PDF Title
+
+Just before `\begin{document}`, add:
+
+```latex
+\usepackage{hyperref}
+\hypersetup{pdftitle={Your Title Here}}
+```
+
+For the title, use whichever is present in the document:
+
+- The argument of `\title{...}`, or
+- The argument of `\header{...}`, or
+- A descriptive title inferred from the document content.
+
+## 4. Tag Tables
+
+If the document contains tables, each table needs its header rows or columns identified. Add a `\tagpdfsetup` call immediately before the relevant `tabular` environment:
+
+::: {.callout-tip}
+## Header row (most common)
+```latex
+\tagpdfsetup{table/header-rows={1}}
+\begin{tabular}{...}
+  ...
+\end{tabular}
+```
+:::
+
+::: {.callout-tip}
+## Header column
+```latex
+\tagpdfsetup{table/header-columns={1}}
+\begin{tabular}{...}
+  ...
+\end{tabular}
+```
+:::
+
+Specify the relevant row or column numbers as a comma-separated list (e.g., `{1,2}` if the first two rows are headers).
+
+## 5. Add Alt Text to Images
+
+Every `\includegraphics` call must include an `alt` key with a descriptive text for screen reader users:
+
+::: {.callout-important}
+## Without alt text (inaccessible)
+```latex
+\includegraphics[width=\textwidth]{figure1}
+```
+:::
+
+::: {.callout-tip}
+## With alt text (accessible)
+```latex
+\includegraphics[width=\textwidth, 
+alt={A graph showing the convergence of the sequence to zero as n increases.}]
+{figure1}
+```
+:::
+
+Write a few descriptive sentences that convey the meaning or content of the image, not just its appearance. 
+
+The details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.
+
+## 6. Check Color Contrast
+
+If the document uses `\textcolor` or similar commands, verify that the color combinations meet minimum contrast requirements (contrast ratio of at least 4.5:1 for normal text).
+
+::: {.callout-important}
+## Poor contrast
+```latex
+\textcolor{red}{Important note}
+\textcolor{green}{Correct answer}
+```
+:::
+
+::: {.callout-tip}
+## Sufficient contrast
+```latex
+\textcolor{blue}{Important note}
+\textcolor{teal}{Correct answer}
+```
+:::
+
+Use a [color contrast checker](https://webaim.org/resources/contrastchecker/) to verify your color choices.
+
+## Summary Checklist
+
+| Step | What to add/change |
+|------|--------------------|
+| 1 | `\DocumentMetadata{...}` and `\tagpdfsetup{math/alt/use}` at top of file |
+| 2 | `\usepackage{unicode-math}` after `\documentclass` |
+| 3 | `\usepackage{hyperref}` + `\hypersetup{pdftitle={...}}` before `\begin{document}` |
+| 4 | `\tagpdfsetup{table/header-rows={...}}` before each table |
+| 5 | `alt={...}` in every `\includegraphics` |
+| 6 | Verify color contrast ratios |
+
+## Further Reading
+
+- [LaTeX Tagging Project](https://latex3.github.io/tagging-project/) — official documentation and ongoing development

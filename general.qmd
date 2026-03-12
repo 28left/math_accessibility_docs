@@ -11,37 +11,43 @@
 
 ## Examples
 
-### Use of structural elements    
-
-In LaTeX:
+### Use of structural elements in LaTeX
 
 ::: {.callout-important}
-## Bad 
-```
+## Bad (not using latex structure)
+
+
+```latex 
 \texbf{1. My Section}
 ```
-:::
+::: 
+
 
 ::: {.callout-tip}
-## Good
-```
+## Good (using latex structure)
+
+```latex
 \section{My Section}
+
+\subsection*{My unnumbered Subsection}
 ```
 :::
 
 or 
 
 ::: {.callout-important}
-## Bad 
-```
+## Bad (not using predefined latex structure)
+
+```latex
 $\cdot$ Item 1
 $\cdot$ Item 2
 ```
 :::
 
 ::: {.callout-tip}
-## Good
-```
+## Good (using predefined latex structure 'itemize')
+
+```latex
 \begin{itemize}
 \item Item 1
 \item Item 2
@@ -50,22 +56,24 @@ $\cdot$ Item 2
 :::
 
 
-### Use of color
+### Use of colors in LaTeX
 
 
 ::: {.callout-important}
 ## Bad (not enough contrast)
-```
-\textcolor{red}
-\textcolor{green}
+
+```latex
+\textcolor{red}{...}
+\textcolor{green}{...}
 ```
 :::
 
 ::: {.callout-tip}
 ## Good (sufficient contrast)
-```
-\textcolor{blue}
-\textcolor{teal}
+
+```latex
+\textcolor{blue}{...}
+\textcolor{teal}{...}
 ```
 :::
 

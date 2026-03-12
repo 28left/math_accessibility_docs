@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>general – Guide to Accessibility for Mathematicians</title>
+<title>tagged-pdf – Guide to Accessibility for Mathematicians</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,11 +129,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./general.html" aria-current="page"> 
+    <a class="nav-link" href="./general.html"> 
 <span class="menu-text">General Principles</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./tagged-pdf.html"> 
+    <a class="nav-link active" href="./tagged-pdf.html" aria-current="page"> 
 <span class="menu-text">Tagged PDFs</span></a>
   </li>  
   <li class="nav-item">
@@ -156,13 +156,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general-principles-for-accessibility" id="toc-general-principles-for-accessibility" class="nav-link active" data-scroll-target="#general-principles-for-accessibility">General Principles for Accessibility</a>
+  <li><a href="#creating-tagged-pdfs-from-latex" id="toc-creating-tagged-pdfs-from-latex" class="nav-link active" data-scroll-target="#creating-tagged-pdfs-from-latex">Creating Tagged PDFs from LaTeX</a>
   <ul class="collapse">
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a>
-  <ul class="collapse">
-  <li><a href="#use-of-structural-elements-in-latex" id="toc-use-of-structural-elements-in-latex" class="nav-link" data-scroll-target="#use-of-structural-elements-in-latex">Use of structural elements in LaTeX</a></li>
-  <li><a href="#use-of-colors-in-latex" id="toc-use-of-colors-in-latex" class="nav-link" data-scroll-target="#use-of-colors-in-latex">Use of colors in LaTeX</a></li>
-  </ul></li>
+  <li><a href="#add-document-metadata" id="toc-add-document-metadata" class="nav-link" data-scroll-target="#add-document-metadata">1. Add Document Metadata</a></li>
+  <li><a href="#load-unicode-math" id="toc-load-unicode-math" class="nav-link" data-scroll-target="#load-unicode-math">2. Load <code>unicode-math</code></a></li>
+  <li><a href="#add-a-pdf-title" id="toc-add-a-pdf-title" class="nav-link" data-scroll-target="#add-a-pdf-title">3. Add a PDF Title</a></li>
+  <li><a href="#tag-tables" id="toc-tag-tables" class="nav-link" data-scroll-target="#tag-tables">4. Tag Tables</a></li>
+  <li><a href="#add-alt-text-to-images" id="toc-add-alt-text-to-images" class="nav-link" data-scroll-target="#add-alt-text-to-images">5. Add Alt Text to Images</a></li>
+  <li><a href="#check-color-contrast" id="toc-check-color-contrast" class="nav-link" data-scroll-target="#check-color-contrast">6. Check Color Contrast</a></li>
+  <li><a href="#summary-checklist" id="toc-summary-checklist" class="nav-link" data-scroll-target="#summary-checklist">Summary Checklist</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -173,92 +176,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="general-principles-for-accessibility" class="level1">
-<h1>General Principles for Accessibility</h1>
+<section id="creating-tagged-pdfs-from-latex" class="level1">
+<h1>Creating Tagged PDFs from LaTeX</h1>
+<p>Tagged PDFs contain structural and semantic information that makes them accessible to screen readers and other assistive technologies. This page explains the changes needed to compile an existing LaTeX file as a tagged PDF using <code>lualatex</code>.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Tagged PDF support requires compiling with <strong><code>lualatex</code></strong> (not <code>pdflatex</code> or <code>xelatex</code>).</p>
+</div>
+</div>
+</div>
+<section id="add-document-metadata" class="level2">
+<h2 class="anchored" data-anchor-id="add-document-metadata">1. Add Document Metadata</h2>
+<p>At the very <strong>top of the file</strong> — before <code>\documentclass</code> — add the following block:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\DocumentMetadata</span>{</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    tagging=on,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    pdfstandard=ua-2,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    lang=en,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    tagging-setup = {math/setup=mathml-SE}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\tagpdfsetup</span>{math/alt/use}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This enables tagging, sets the PDF/UA-2 accessibility standard, declares the document language, and configures math tagging via MathML.</p>
+</section>
+<section id="load-unicode-math" class="level2">
+<h2 class="anchored" data-anchor-id="load-unicode-math">2. Load <code>unicode-math</code></h2>
+<p>Immediately after the <code>\documentclass{...}</code> line, add:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>{<span class="ex">unicode-math</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This package is required for proper math tagging with <code>lualatex</code>.</p>
+</section>
+<section id="add-a-pdf-title" class="level2">
+<h2 class="anchored" data-anchor-id="add-a-pdf-title">3. Add a PDF Title</h2>
+<p>Just before <code>\begin{document}</code>, add:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>{<span class="ex">hyperref</span>}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\hypersetup</span>{pdftitle={Your Title Here}}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For the title, use whichever is present in the document:</p>
 <ul>
-<li><p>Whenever possible, use <strong>structural elements</strong> to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables.</p></li>
-<li><p><strong>Don’t use color as the only way to communicate information.</strong> If you are using colors, make sure to have <strong>sufficient contrast</strong>.</p></li>
-<li><p><strong>Put alt text (text descriptions) on images and graphs.</strong></p></li>
-<li><p><strong>Make sure all videos you are using have accurate captions and a transcript.</strong></p></li>
+<li>The argument of <code>\title{...}</code>, or</li>
+<li>The argument of <code>\header{...}</code>, or</li>
+<li>A descriptive title inferred from the document content.</li>
 </ul>
-<section id="examples" class="level2">
-<h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<section id="use-of-structural-elements-in-latex" class="level3">
-<h3 class="anchored" data-anchor-id="use-of-structural-elements-in-latex">Use of structural elements in LaTeX</h3>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Bad (not using latex structure)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\texbf</span>{1. My Section}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Good (using latex structure)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\section</span>{My Section}</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">\subsection*</span>{My unnumbered Subsection}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<p>or</p>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Bad (not using predefined latex structure)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb3"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ss">$</span><span class="sc">\cdot</span><span class="ss">$</span> Item 1</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ss">$</span><span class="sc">\cdot</span><span class="ss">$</span> Item 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Good (using predefined latex structure ‘itemize’)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">itemize</span>}</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\item</span> Item 1</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\item</span> Item 2</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">itemize</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
 </section>
-<section id="use-of-colors-in-latex" class="level3">
-<h3 class="anchored" data-anchor-id="use-of-colors-in-latex">Use of colors in LaTeX</h3>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<section id="tag-tables" class="level2">
+<h2 class="anchored" data-anchor-id="tag-tables">4. Tag Tables</h2>
+<p>If the document contains tables, each table needs its header rows or columns identified. Add a <code>\tagpdfsetup</code> call immediately before the relevant <code>tabular</code> environment:</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Bad (not enough contrast)
+Header row (most common)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb5"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\textcolor</span>{red}{...}</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\textcolor</span>{green}{...}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\tagpdfsetup</span>{table/header-rows={1}}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tabular</span>}{...}</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tabular</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
@@ -267,17 +244,133 @@ Bad (not enough contrast)
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Good (sufficient contrast)
+Header column
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb6"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\textcolor</span>{blue}{...}</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\textcolor</span>{teal}{...}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\tagpdfsetup</span>{table/header-columns={1}}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tabular</span>}{...}</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tabular</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<p>Specify the relevant row or column numbers as a comma-separated list (e.g., <code>{1,2}</code> if the first two rows are headers).</p>
+</section>
+<section id="add-alt-text-to-images" class="level2">
+<h2 class="anchored" data-anchor-id="add-alt-text-to-images">5. Add Alt Text to Images</h2>
+<p>Every <code>\includegraphics</code> call must include an <code>alt</code> key with a descriptive text for screen reader users:</p>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Without alt text (inaccessible)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb6"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\includegraphics</span>[width=<span class="fu">\textwidth</span>]{<span class="ex">figure1</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+With alt text (accessible)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb7"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\includegraphics</span>[width=<span class="fu">\textwidth</span>, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>alt={A graph showing the convergence of the sequence to zero as n increases.}]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>{<span class="ex">figure1</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Write a few descriptive sentences that convey the meaning or content of the image, not just its appearance.</p>
+<p>The details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.</p>
+</section>
+<section id="check-color-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="check-color-contrast">6. Check Color Contrast</h2>
+<p>If the document uses <code>\textcolor</code> or similar commands, verify that the color combinations meet minimum contrast requirements (contrast ratio of at least 4.5:1 for normal text).</p>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Poor contrast
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb8"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\textcolor</span>{red}{Important note}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\textcolor</span>{green}{Correct answer}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Sufficient contrast
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb9"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\textcolor</span>{blue}{Important note}</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\textcolor</span>{teal}{Correct answer}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Use a <a href="https://webaim.org/resources/contrastchecker/">color contrast checker</a> to verify your color choices.</p>
+</section>
+<section id="summary-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="summary-checklist">Summary Checklist</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What to add/change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>\DocumentMetadata{...}</code> and <code>\tagpdfsetup{math/alt/use}</code> at top of file</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>\usepackage{unicode-math}</code> after <code>\documentclass</code></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>\usepackage{hyperref}</code> + <code>\hypersetup{pdftitle={...}}</code> before <code>\begin{document}</code></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>\tagpdfsetup{table/header-rows={...}}</code> before each table</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><code>alt={...}</code> in every <code>\includegraphics</code></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Verify color contrast ratios</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
+<ul>
+<li><a href="https://latex3.github.io/tagging-project/">LaTeX Tagging Project</a> — official documentation and ongoing development</li>
+</ul>
 
 
-</section>
 </section>
 </section>
 

@@ -4,7 +4,7 @@
     "href": "general.html",
     "title": "General Principles for Accessibility",
     "section": "",
-    "text": "Whenever possible, use structural elements to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables.\nDon’t use color as the only way to communicate information. If you are using colors, make sure to have sufficient contrast.\nPut alt text (text descriptions) on images and graphs.\nMake sure all videos you are using have accurate captions and a transcript.\n\n\n\n\n\nIn LaTeX:\n\n\n\n\n\n\nBad\n\n\n\n\\texbf{1. My Section}\n\n\n\n\n\n\n\n\nGood\n\n\n\n\\section{My Section}\n\n\nor\n\n\n\n\n\n\nBad\n\n\n\n$\\cdot$ Item 1\n$\\cdot$ Item 2\n\n\n\n\n\n\n\n\nGood\n\n\n\n\\begin{itemize}\n\\item Item 1\n\\item Item 2\n\\end{itemize}\n\n\n\n\n\n\n\n\n\n\n\nBad (not enough contrast)\n\n\n\n\\textcolor{red}\n\\textcolor{green}\n\n\n\n\n\n\n\n\nGood (sufficient contrast)\n\n\n\n\\textcolor{blue}\n\\textcolor{teal}"
+    "text": "Whenever possible, use structural elements to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables.\nDon’t use color as the only way to communicate information. If you are using colors, make sure to have sufficient contrast.\nPut alt text (text descriptions) on images and graphs.\nMake sure all videos you are using have accurate captions and a transcript.\n\n\n\n\n\n\n\n\n\n\n\nBad (not using latex structure)\n\n\n\n\\texbf{1. My Section}\n\n\n\n\n\n\n\n\nGood (using latex structure)\n\n\n\n\\section{My Section}\n\n\\subsection*{My unnumbered Subsection}\n\n\nor\n\n\n\n\n\n\nBad (not using predefined latex structure)\n\n\n\n$\\cdot$ Item 1\n$\\cdot$ Item 2\n\n\n\n\n\n\n\n\nGood (using predefined latex structure ‘itemize’)\n\n\n\n\\begin{itemize}\n\\item Item 1\n\\item Item 2\n\\end{itemize}\n\n\n\n\n\n\n\n\n\n\n\nBad (not enough contrast)\n\n\n\n\\textcolor{red}{...}\n\\textcolor{green}{...}\n\n\n\n\n\n\n\n\nGood (sufficient contrast)\n\n\n\n\\textcolor{blue}{...}\n\\textcolor{teal}{...}"
   },
   {
     "objectID": "about.html",
@@ -25,6 +25,69 @@
     "href": "general.html#examples",
     "title": "General Principles for Accessibility",
     "section": "",
-    "text": "In LaTeX:\n\n\n\n\n\n\nBad\n\n\n\n\\texbf{1. My Section}\n\n\n\n\n\n\n\n\nGood\n\n\n\n\\section{My Section}\n\n\nor\n\n\n\n\n\n\nBad\n\n\n\n$\\cdot$ Item 1\n$\\cdot$ Item 2\n\n\n\n\n\n\n\n\nGood\n\n\n\n\\begin{itemize}\n\\item Item 1\n\\item Item 2\n\\end{itemize}\n\n\n\n\n\n\n\n\n\n\n\nBad (not enough contrast)\n\n\n\n\\textcolor{red}\n\\textcolor{green}\n\n\n\n\n\n\n\n\nGood (sufficient contrast)\n\n\n\n\\textcolor{blue}\n\\textcolor{teal}"
+    "text": "Bad (not using latex structure)\n\n\n\n\\texbf{1. My Section}\n\n\n\n\n\n\n\n\nGood (using latex structure)\n\n\n\n\\section{My Section}\n\n\\subsection*{My unnumbered Subsection}\n\n\nor\n\n\n\n\n\n\nBad (not using predefined latex structure)\n\n\n\n$\\cdot$ Item 1\n$\\cdot$ Item 2\n\n\n\n\n\n\n\n\nGood (using predefined latex structure ‘itemize’)\n\n\n\n\\begin{itemize}\n\\item Item 1\n\\item Item 2\n\\end{itemize}\n\n\n\n\n\n\n\n\n\n\n\nBad (not enough contrast)\n\n\n\n\\textcolor{red}{...}\n\\textcolor{green}{...}\n\n\n\n\n\n\n\n\nGood (sufficient contrast)\n\n\n\n\\textcolor{blue}{...}\n\\textcolor{teal}{...}"
+  },
+  {
+    "objectID": "tagged-pdf.html",
+    "href": "tagged-pdf.html",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "Tagged PDFs contain structural and semantic information that makes them accessible to screen readers and other assistive technologies. This page explains the changes needed to compile an existing LaTeX file as a tagged PDF using lualatex.\n\n\n\n\n\n\nTagged PDF support requires compiling with lualatex (not pdflatex or xelatex).\n\n\n\n\n\nAt the very top of the file — before \\documentclass — add the following block:\n\\DocumentMetadata{\n    tagging=on,\n    pdfstandard=ua-2,\n    lang=en,\n    tagging-setup = {math/setup=mathml-SE}\n}\n\\tagpdfsetup{math/alt/use}\nThis enables tagging, sets the PDF/UA-2 accessibility standard, declares the document language, and configures math tagging via MathML.\n\n\n\nImmediately after the \\documentclass{...} line, add:\n\\usepackage{unicode-math}\nThis package is required for proper math tagging with lualatex.\n\n\n\nJust before \\begin{document}, add:\n\\usepackage{hyperref}\n\\hypersetup{pdftitle={Your Title Here}}\nFor the title, use whichever is present in the document:\n\nThe argument of \\title{...}, or\nThe argument of \\header{...}, or\nA descriptive title inferred from the document content.\n\n\n\n\nIf the document contains tables, each table needs its header rows or columns identified. Add a \\tagpdfsetup call immediately before the relevant tabular environment:\n\n\n\n\n\n\nHeader row (most common)\n\n\n\n\\tagpdfsetup{table/header-rows={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\n\n\n\n\n\n\nHeader column\n\n\n\n\\tagpdfsetup{table/header-columns={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\nSpecify the relevant row or column numbers as a comma-separated list (e.g., {1,2} if the first two rows are headers).\n\n\n\nEvery \\includegraphics call must include an alt key with a descriptive text for screen reader users:\n\n\n\n\n\n\nWithout alt text (inaccessible)\n\n\n\n\\includegraphics[width=\\textwidth]{figure1}\n\n\n\n\n\n\n\n\nWith alt text (accessible)\n\n\n\n\\includegraphics[width=\\textwidth, \nalt={A graph showing the convergence of the sequence to zero as n increases.}]\n{figure1}\n\n\nWrite a few descriptive sentences that convey the meaning or content of the image, not just its appearance.\nThe details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.\n\n\n\nIf the document uses \\textcolor or similar commands, verify that the color combinations meet minimum contrast requirements (contrast ratio of at least 4.5:1 for normal text).\n\n\n\n\n\n\nPoor contrast\n\n\n\n\\textcolor{red}{Important note}\n\\textcolor{green}{Correct answer}\n\n\n\n\n\n\n\n\nSufficient contrast\n\n\n\n\\textcolor{blue}{Important note}\n\\textcolor{teal}{Correct answer}\n\n\nUse a color contrast checker to verify your color choices.\n\n\n\n\n\n\n\n\n\n\nStep\nWhat to add/change\n\n\n\n\n1\n\\DocumentMetadata{...} and \\tagpdfsetup{math/alt/use} at top of file\n\n\n2\n\\usepackage{unicode-math} after \\documentclass\n\n\n3\n\\usepackage{hyperref} + \\hypersetup{pdftitle={...}} before \\begin{document}\n\n\n4\n\\tagpdfsetup{table/header-rows={...}} before each table\n\n\n5\nalt={...} in every \\includegraphics\n\n\n6\nVerify color contrast ratios\n\n\n\n\n\n\n\nLaTeX Tagging Project — official documentation and ongoing development"
+  },
+  {
+    "objectID": "tagged-pdf.html#add-document-metadata",
+    "href": "tagged-pdf.html#add-document-metadata",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "At the very top of the file — before \\documentclass — add the following block:\n\\DocumentMetadata{\n    tagging=on,\n    pdfstandard=ua-2,\n    lang=en,\n    tagging-setup = {math/setup=mathml-SE}\n}\n\\tagpdfsetup{math/alt/use}\nThis enables tagging, sets the PDF/UA-2 accessibility standard, declares the document language, and configures math tagging via MathML."
+  },
+  {
+    "objectID": "tagged-pdf.html#load-unicode-math",
+    "href": "tagged-pdf.html#load-unicode-math",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "Immediately after the \\documentclass{...} line, add:\n\\usepackage{unicode-math}\nThis package is required for proper math tagging with lualatex."
+  },
+  {
+    "objectID": "tagged-pdf.html#add-a-pdf-title",
+    "href": "tagged-pdf.html#add-a-pdf-title",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "Just before \\begin{document}, add:\n\\usepackage{hyperref}\n\\hypersetup{pdftitle={Your Title Here}}\nFor the title, use whichever is present in the document:\n\nThe argument of \\title{...}, or\nThe argument of \\header{...}, or\nA descriptive title inferred from the document content."
+  },
+  {
+    "objectID": "tagged-pdf.html#tag-tables",
+    "href": "tagged-pdf.html#tag-tables",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "If the document contains tables, each table needs its header rows or columns identified. Add a \\tagpdfsetup call immediately before the relevant tabular environment:\n\n\n\n\n\n\nHeader row (most common)\n\n\n\n\\tagpdfsetup{table/header-rows={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\n\n\n\n\n\n\nHeader column\n\n\n\n\\tagpdfsetup{table/header-columns={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\nSpecify the relevant row or column numbers as a comma-separated list (e.g., {1,2} if the first two rows are headers)."
+  },
+  {
+    "objectID": "tagged-pdf.html#add-alt-text-to-images",
+    "href": "tagged-pdf.html#add-alt-text-to-images",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "Every \\includegraphics call must include an alt key with a descriptive text for screen reader users:\n\n\n\n\n\n\nWithout alt text (inaccessible)\n\n\n\n\\includegraphics[width=\\textwidth]{figure1}\n\n\n\n\n\n\n\n\nWith alt text (accessible)\n\n\n\n\\includegraphics[width=\\textwidth, \nalt={A graph showing the convergence of the sequence to zero as n increases.}]\n{figure1}\n\n\nWrite a few descriptive sentences that convey the meaning or content of the image, not just its appearance.\nThe details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes."
+  },
+  {
+    "objectID": "tagged-pdf.html#check-color-contrast",
+    "href": "tagged-pdf.html#check-color-contrast",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "If the document uses \\textcolor or similar commands, verify that the color combinations meet minimum contrast requirements (contrast ratio of at least 4.5:1 for normal text).\n\n\n\n\n\n\nPoor contrast\n\n\n\n\\textcolor{red}{Important note}\n\\textcolor{green}{Correct answer}\n\n\n\n\n\n\n\n\nSufficient contrast\n\n\n\n\\textcolor{blue}{Important note}\n\\textcolor{teal}{Correct answer}\n\n\nUse a color contrast checker to verify your color choices."
+  },
+  {
+    "objectID": "tagged-pdf.html#summary-checklist",
+    "href": "tagged-pdf.html#summary-checklist",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "Step\nWhat to add/change\n\n\n\n\n1\n\\DocumentMetadata{...} and \\tagpdfsetup{math/alt/use} at top of file\n\n\n2\n\\usepackage{unicode-math} after \\documentclass\n\n\n3\n\\usepackage{hyperref} + \\hypersetup{pdftitle={...}} before \\begin{document}\n\n\n4\n\\tagpdfsetup{table/header-rows={...}} before each table\n\n\n5\nalt={...} in every \\includegraphics\n\n\n6\nVerify color contrast ratios"
+  },
+  {
+    "objectID": "tagged-pdf.html#further-reading",
+    "href": "tagged-pdf.html#further-reading",
+    "title": "Creating Tagged PDFs from LaTeX",
+    "section": "",
+    "text": "LaTeX Tagging Project — official documentation and ongoing development"
   }
 ]
