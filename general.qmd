@@ -1,0 +1,71 @@
+# General Principles for Accessibility
+
+-   Whenever possible, use **structural elements** to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables. 
+
+-   **Don’t use color as the only way to communicate information.** If you are using colors, make sure to have **sufficient contrast**.
+
+-   **Put alt text (text descriptions) on images and graphs.**
+
+-   **Make sure all videos you are using have accurate captions and a transcript.** 
+
+
+## Examples
+
+### Use of structural elements    
+
+In LaTeX:
+
+::: {.callout-important}
+## Bad 
+```
+\texbf{1. My Section}
+```
+:::
+
+::: {.callout-tip}
+## Good
+```
+\section{My Section}
+```
+:::
+
+or 
+
+::: {.callout-important}
+## Bad 
+```
+$\cdot$ Item 1
+$\cdot$ Item 2
+```
+:::
+
+::: {.callout-tip}
+## Good
+```
+\begin{itemize}
+\item Item 1
+\item Item 2
+\end{itemize}
+```
+:::
+
+
+### Use of color
+
+
+::: {.callout-important}
+## Bad (not enough contrast)
+```
+\textcolor{red}
+\textcolor{green}
+```
+:::
+
+::: {.callout-tip}
+## Good (sufficient contrast)
+```
+\textcolor{blue}
+\textcolor{teal}
+```
+:::
+

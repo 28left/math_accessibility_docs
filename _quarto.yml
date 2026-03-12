@@ -1,0 +1,26 @@
+project:
+  type: website
+
+  
+website:
+  title: "Guide to Accessibility for Mathematicians"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: general.qmd
+        text: General Principles  
+      - about.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+    callout-appearance: simple
+    callout-icon: false
+
+
+
