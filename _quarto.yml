@@ -10,8 +10,12 @@ website:
         text: Home
       - href: general.qmd
         text: General Principles
+      - href: workflows.qmd
+        text: Workflows
       - href: tagged-pdf.qmd
         text: Tagged PDFs
+      - href: lualatex-guide.qmd
+        text: LuaLaTeX Guide
       - about.qmd
 
 format:

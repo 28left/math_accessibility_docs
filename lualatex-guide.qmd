@@ -1,0 +1,234 @@
+---
+title: "Using LuaLaTeX"
+---
+
+## What is LuaLaTeX?
+
+**LuaLaTeX** is a modern TeX engine that extends pdfLaTeX with the [Lua](https://www.lua.org/) scripting language. It is the recommended engine for most contemporary LaTeX projects because it supports:
+
+- **Unicode natively** — no need for `inputenc` or `fontenc`
+- **OpenType and TrueType fonts** via the `fontspec` package
+- **Lua scripting** for dynamic document generation
+- **Full backwards compatibility** with most pdfLaTeX documents
+- Better support for complex scripts (Arabic, CJK, etc.)
+
+LuaLaTeX is bundled with all major TeX distributions (TeX Live, MiKTeX) so chances are that you already have LuaLaTeX on your computer. 
+
+::: {.callout-important}
+For accessible tagging to work, you need to use a **current version** of LuaLaTeX. Please refer to the documentation of the TeX-distribution or IDE you are using for instructions on how to update LuaLaTeX to the latest release.
+:::
+---
+
+## Set LuaLaTeX as Your Engine in Popular IDEs
+
+### TeXShop (macOS)
+
+TeXShop is the classic macOS LaTeX editor included with MacTeX.
+
+**Per-document (recommended):**
+
+Add this magic comment at the top of your `.tex` file:
+
+```latex
+% !TEX program = lualatex
+```
+
+**As the default engine:**
+
+1. Open **TeXShop → Preferences**
+2. Go to the **Engine** tab
+3. Under *Default Command*, select **LuaLaTeX** from the dropdown
+4. Click **OK**
+
+### TeXworks (Windows, macOS, Linux)
+
+TeXworks is a lightweight cross-platform editor bundled with both TeX Live and MiKTeX.
+
+**Per-document:**
+
+```latex
+% !TEX program = lualatex
+```
+
+**As the default engine:**
+
+1. Go to **Edit → Preferences → Typesetting**
+2. Under *Default program*, select **LuaLaTeX**
+3. Click **OK**
+
+### TeXstudio (Windows, macOS, Linux)
+
+TeXstudio is one of the most popular full-featured LaTeX editors.
+
+**Per-document:**
+
+```latex
+% !TeX program = lualatex
+```
+
+**As the default compiler:**
+
+1. Open **Options → Configure TeXstudio**
+2. Go to **Build**
+3. Under *Default Compiler*, select **LuaLaTeX** from the dropdown
+4. Click **OK**
+
+::: {.callout-tip}
+TeXstudio also supports setting the bibliography tool and other build options in the same Build settings panel.
+:::
+
+### Overleaf (Web-based)
+
+[Overleaf](https://www.overleaf.com) is the leading cloud-based LaTeX editor — no installation required.
+
+**Per-project:**
+
+1. Open your project
+2. Click the **Menu** button (☰) in the top-left corner
+3. Under **Settings → Compiler**, select **LuaLaTeX**
+4. Click anywhere to close — all future compilations will use LuaLaTeX
+
+Alternatively, add the magic comment to your main `.tex` file:
+
+```latex
+% !TEX program = lualatex
+```
+
+### VS Code with LaTeX Workshop (Windows, macOS, Linux)
+
+[LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) is the most popular LaTeX extension for VS Code.
+
+**Per-document:**
+
+```latex
+% !TEX program = lualatex
+```
+
+**As the default recipe (settings.json):**
+
+Open **Settings → Open Settings (JSON)** (`Ctrl+Shift+P` → *"Open User Settings JSON"`) and add:
+
+```{.json filename="settings.json"}
+{
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "LuaLaTeX",
+      "tools": ["lualatex"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "lualatex",
+      "command": "lualatex",
+      "args": [
+        "--shell-escape",
+        "--interaction=nonstopmode",
+        "--synctex=1",
+        "%DOC%"
+      ]
+    }
+  ]
+}
+```
+
+### Emacs with AUCTeX (Windows, macOS, Linux)
+
+**Per-document (file-local variables):**
+
+Add this at the bottom of your `.tex` file:
+
+```latex
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% End:
+```
+
+**Globally in your `init.el`:**
+
+```{.lisp filename="init.el"}
+(setq-default TeX-engine 'luatex)
+```
+
+**During a session:**
+
+Use `M-x TeX-engine-set` and select `luatex`.
+
+### Vim / Neovim with VimTeX (Windows, macOS, Linux)
+
+**Per-document (modeline at top of file):**
+
+```latex
+% vim: set ft=tex spell spelllang=en_us:
+```
+
+**Global setting in `init.vim` / `init.lua`:**
+
+```{.vim filename="init.vim"}
+let g:vimtex_compiler_latexmk_engines = {'_': '-lualatex'}
+```
+
+```{.lua filename="init.lua"}
+vim.g.vimtex_compiler_latexmk_engines = { _ = '-lualatex' }
+```
+
+---
+
+## An Example LuaLaTeX Document
+
+Here is a minimal LuaLaTeX document that you can use for testing your installation:
+
+```{.latex filename="hello-lualatex.tex"}
+\documentclass{article}
+
+% LuaLaTeX-specific packages
+\usepackage{fontspec}       % OpenType font support
+\usepackage{luacode}        % Lua scripting in LaTeX
+
+% Set a system font (change to one available on your system)
+\setmainfont{Latin Modern Roman}
+
+\title{My First LuaLaTeX Document}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Hello, LuaLaTeX!}
+
+This document is compiled with LuaLaTeX.
+It supports Unicode natively: café, naïve, Ångström, 日本語.
+
+\section{Lua Scripting}
+
+The answer to life is
+\begin{luacode}
+tex.sprint(6 * 7)
+\end{luacode}.
+
+\end{document}
+```
+
+---
+
+## Common Issues and Fixes
+
+| Problem | Cause | Fix |
+|---|---|---|
+| `lualatex: command not found` | TeX not on PATH | Add TeX bin dir to your `PATH` |
+| Font not found | System font not installed | Install font or use a TeX font |
+| `! Package fontspec Error` | Using pdfLaTeX accidentally | Ensure LuaLaTeX is the selected engine |
+| Slow compilation | LuaLaTeX is inherently slower | Use `--draftmode` for intermediate builds |
+| Unicode characters not rendering | Missing font coverage | Use a broader font like Noto or DejaVu |
+
+---
+
+## Additional Resources
+
+- [LuaLaTeX documentation (luatex.org)](http://www.luatex.org/documentation.html)
+- [fontspec package documentation (CTAN)](https://ctan.org/pkg/fontspec)
+- [TeX Live Guide](https://tug.org/texlive/doc/texlive-en/texlive-en.html)
+- [LaTeX Wikibook — LuaLaTeX chapter](https://en.wikibooks.org/wiki/LaTeX/LuaLaTeX)
+- [Overleaf LuaLaTeX documentation](https://www.overleaf.com/learn/latex/LuaLaTeX)

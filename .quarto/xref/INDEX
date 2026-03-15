@@ -10,5 +10,11 @@
   },
   "tagged-pdf.qmd": {
     "tagged-pdf.html": "1214680b"
+  },
+  "workflows.qmd": {
+    "workflows.html": "57099912"
+  },
+  "lualatex-guide.qmd": {
+    "lualatex-guide.html": "39df3c78"
   }
 }
