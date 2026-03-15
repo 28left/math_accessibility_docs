@@ -15,6 +15,10 @@ There are basically two options:
 **--->** Use `LaTeXML` to produce an html file instead of PDF.
 
 
+## I have Beamer slides that I use for lectures and also post them on Canvas (or on other sites).
+
+
+
 ## I have an extensive set of lecture notes and would like to turn them into an interactive ebook hosted on the web.
 
 You can try one of the modern, powerful, and versatile publishing frameworks, such as:
@@ -22,3 +26,5 @@ You can try one of the modern, powerful, and versatile publishing frameworks, su
 **--->** [PreText](https://pretextbook.org/) <br>
 **--->** [Quarto](https://quarto.org)
 
+
+## I have handwritten documents that I make available to my students online.

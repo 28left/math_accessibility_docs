@@ -4,7 +4,7 @@
 
 -   **Don’t use color as the only way to communicate information.** If you are using colors, make sure to have **sufficient contrast**.
 
--   **Put alt text (text descriptions) on images and graphs.**
+-   **Put alt text (text descriptions) on images and graphs.** ([More info](alt-text.html))
 
 -   **Make sure all videos you are using have accurate captions and a transcript.** 
 

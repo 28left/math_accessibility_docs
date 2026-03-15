@@ -1,0 +1,32 @@
+# ALT Text
+
+Every image needs to have an ALT text description. This needs to be more than just a caption like "Graph of the function $f(x)$", but rather a few descriptive sentences that convey the meaning or content of the image, not just its appearance. 
+
+The details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes. 
+
+::: {.callout-tip}
+## Example
+\
+See [this page](https://28left.github.io/110jupyter/ch_Precalc/precalc_graphing.html).
+
+Here, the ALT text is given in a separate structural element (the "Long Text Description" dropdown), but there are other ways to integrate these in your document - for example, [when using `\includegraphics`](tagged-pdf.html#add-alt-text-to-images)
+:::
+
+
+## Producing ALT Text
+
+Ideally, you write a long description for each of your images yourself. This gives you the best control over accuracy and what information you would like to convey. But if you have a large number of images, this may not be practicable in the short run. 
+
+AI bots have gotten much better at producing image descriptions recently. You can upload your image in any format (pdf, png, jpg, etc.) and prompt it to produce a text descrition:
+
+```latex
+"Generate a long description of the image for accessibility."
+```
+
+In many cases, this will even work if your image is generated via code, for example using `tkiz`. In this case, paste the tikz code instead of the graphics file.
+
+::: {.callout-important}
+## Important
+
+Check AI-generated text for accuracy.
+:::

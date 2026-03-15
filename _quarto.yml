@@ -4,8 +4,10 @@ project:
   
 website:
   title: "Guide to Accessibility for Mathematicians"
-  navbar:
-    left:
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
       - href: index.qmd
         text: Home
       - href: general.qmd
@@ -16,6 +18,8 @@ website:
         text: Tagged PDFs
       - href: lualatex-guide.qmd
         text: LuaLaTeX Guide
+      - href: alt-text.qmd
+        text: ALT Text
       - about.qmd
 
 format:
