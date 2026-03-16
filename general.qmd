@@ -77,3 +77,8 @@ $\cdot$ Item 2
 ```
 :::
 
+Generally, the following LaTeX colors should have sufficient contrast over white background:
+
+```latex
+`blue`, `purple`, `teal`, `violet`, `black`, `darkgray`
+```
