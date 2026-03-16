@@ -4,3 +4,8 @@ _site/
 **/*.quarto_ipynb
 
 /.quarto/
+.quarto/xref/INDEX
+.quarto/idx/general.qmd.json
+.quarto/idx/index.qmd.json
+.quarto/project-cache/deno-kv-file
+.quarto/xref/d843d9ce
