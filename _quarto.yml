@@ -3,7 +3,8 @@ project:
 
   
 website:
-  title: "Guide to Accessibility for Mathematicians"
+  title: "Producing Accessible Documents with LaTeX"
+  page-navigation: true
   sidebar:
     style: "docked"
     search: true
@@ -16,6 +17,8 @@ website:
         text: Workflows
       - href: tagged-pdf.qmd
         text: Tagged PDFs
+      - href: slides.qmd
+        text: Slides
       - href: lualatex-guide.qmd
         text: LuaLaTeX Guide
       - href: alt-text.qmd

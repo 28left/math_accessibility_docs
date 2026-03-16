@@ -1,0 +1,200 @@
+---
+title: "Slides"
+---
+
+## From `beamer` to `ltx-talk`
+
+**Beamer** is the de-facto standard for LaTeX presentations, but it has a fundamental accessibility problem: it produces PDFs that are not tagged. An untagged PDF cannot be navigated by screen readers, fails automated accessibility checks, and cannot reflow for low-vision users.
+
+**`ltx-talk`** is a modern presentation document class built on the [LaTeX PDF tagging project](https://latex3.github.io/tagging-project/). It produces properly tagged, accessible PDFs while keeping a syntax that Beamer users will find familiar. It requires **LuaLaTeX**.
+
+::: {.callout-note}
+Full documentation: <https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/ltx-talk/ltx-talk.pdf>
+
+For a broader discussion of accessible LaTeX slides, see David Eppstein's post [*Making Accessible LaTeX*](https://11011110.github.io/blog/2026/03/01/making-accessible-latex.html).
+:::
+
+---
+
+## Installation
+
+`ltx-talk` is distributed via CTAN and is included in TeX Live and MiKTeX.
+
+**TeX Live / MacTeX:**
+
+```bash
+tlmgr install ltx-talk
+```
+
+**MiKTeX:** install via the MiKTeX Console or on-the-fly when the package is first used.
+
+::: {.callout-important}
+`ltx-talk` requires **LuaLaTeX**. It will not compile with pdfLaTeX or XeLaTeX.
+Remember to set your editor or build tool to use LuaLaTeX (see the companion guide *Installing and Using LuaLaTeX*).
+:::
+
+---
+
+## Minimal Document Structure
+
+A minimal `ltx-talk` presentation looks like this:
+
+```latex
+\documentclass{ltx-talk}
+
+\usepackage{fontspec}   % OpenType fonts — replaces inputenc/fontenc
+
+\title{My Accessible Presentation}
+\author{Author Name}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Introduction}
+  \begin{itemize}
+    \item First point
+    \item Second point
+  \end{itemize}
+\end{frame}
+
+\end{document}
+```
+
+Compile with:
+
+```bash
+lualatex presentation.tex
+```
+
+---
+
+## What Changes for Beamer Users
+
+### The Document Class
+
+```latex
+% Before (Beamer)
+\documentclass[aspectratio=169]{beamer}
+
+% After (ltx-talk)
+\documentclass{ltx-talk}
+```
+
+Options such as `aspectratio` are passed the same way. Check the `ltx-talk` documentation for the full list of supported class options.
+
+### Preamble: Fonts and Encoding
+
+With Beamer + pdfLaTeX, a typical preamble includes:
+
+```latex
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+```
+
+With `ltx-talk` + LuaLaTeX these are **not needed** and should be removed. Use `fontspec` instead to select fonts:
+
+```latex
+\usepackage{fontspec}
+\setmainfont{Latin Modern Sans}  % or any OpenType/TrueType font
+```
+
+### Slides: `frame` Works as Before
+
+The `frame` environment is kept intentionally compatible:
+
+```latex
+% Works the same in ltx-talk
+\begin{frame}{Slide Title}
+  Content here.
+\end{frame}
+```
+
+Short-title and `fragile` options are also supported:
+
+```latex
+\begin{frame}[fragile]{Code Example}
+  \begin{verbatim}
+    print("hello")
+  \end{verbatim}
+\end{frame}
+```
+
+### Overlays and Pauses
+
+Basic overlay commands work:
+
+```latex
+\begin{frame}{Step by Step}
+  \begin{itemize}
+    \item<1-> Always visible
+    \item<2-> Appears on step 2
+    \item<3-> Appears on step 3
+  \end{itemize}
+\end{frame}
+```
+
+::: {.callout-warning}
+Complex Beamer overlay specifications (e.g., `\only`, `\alt`, `\temporal`) may have limited or different support in `ltx-talk`. Consult the documentation and test your document carefully when migrating.
+:::
+
+### Themes
+
+`ltx-talk` has its own theming system, separate from Beamer themes. Beamer theme commands (`\usetheme`, `\usecolortheme`, etc.) **do not work**. Use `ltx-talk`'s own options instead:
+
+```latex
+\documentclass[theme=...]{ltx-talk}
+```
+
+See the package documentation for available themes and customization options.
+
+### Blocks
+
+Standard Beamer block environments are available:
+
+```latex
+\begin{block}{Definition}
+  A graph is a set of vertices and edges.
+\end{block}
+
+\begin{alertblock}{Warning}
+  This approach has known limitations.
+\end{alertblock}
+
+\begin{exampleblock}{Example}
+  Consider the complete graph $K_5$.
+\end{exampleblock}
+```
+
+### What to Remove from Your Beamer Preamble
+
+When migrating, remove or replace these common Beamer-specific commands:
+
+| Remove | Reason |
+|---|---|
+| `\usetheme{...}` | Not applicable; use `ltx-talk` theme options |
+| `\usecolortheme{...}` | Not applicable |
+| `\usefonttheme{...}` | Not applicable |
+| `\usepackage[T1]{fontenc}` | Replaced by `fontspec` + LuaLaTeX |
+| `\usepackage[utf8]{inputenc}` | Not needed with LuaLaTeX |
+| `\setbeamertemplate{...}` | Not applicable |
+| `\setbeamercolor{...}` | Not applicable |
+
+---
+
+## Summary
+
+| Task | Beamer | `ltx-talk` |
+|---|---|---|
+| Engine | pdfLaTeX or LuaLaTeX | **LuaLaTeX only** |
+| Tagged PDF | ✗ | ✓ |
+| `frame` environment | ✓ | ✓ |
+| Beamer themes | ✓ | ✗ (own system) |
+| `fontenc` / `inputenc` | needed (pdfLaTeX) | **not needed** |
+| Basic overlays | ✓ | ✓ (check complex cases) |
+| Blocks | ✓ | ✓ |
+
+Migrating from Beamer to `ltx-talk` is straightforward for most presentations: change the document class, remove the encoding packages and Beamer theme commands, add `fontspec`, and recompile with LuaLaTeX. The payoff is a PDF that is accessible by design.

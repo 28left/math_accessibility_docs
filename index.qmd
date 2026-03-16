@@ -1,7 +1,29 @@
 ---
-title: "Guide to Accessibility for Mathematicians"
+title: "Producing Accessible Documents with LaTeX"
 ---
 
-This is a Quarto website.
+This Website aims to give brief but self-contained instructions on how to use LaTeX to produce documents with accessibility features.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Before delving into details on LaTeX, here are **four core principles that always apply** (LaTeX or not):
+
+## General Principles for Accessibility
+
+-   Whenever possible, use **structural elements** to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables. 
+
+-   **Don’t use color as the only way to communicate information.** If you are using colors, make sure to have **sufficient contrast**.
+
+-   **Put alt text (text descriptions) on images and graphs.** ([More info](alt-text.html))
+
+-   **Make sure all videos you are using have accurate captions and a transcript.** 
+
+## Next steps
+
+**=>** [Some examples](general.qmd#examples) of good and bad LaTeX usage.  
+**=>** On the [Workflows page](workflows.qmd), you can find links to instructions specific to the kind of document you want to produce.
+
+
+## Getting help
+
+The Math Accessibility Team is here to help.
+
+For assistance, email jan.reimann@psu.edu
