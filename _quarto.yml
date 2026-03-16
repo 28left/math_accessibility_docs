@@ -23,7 +23,8 @@ website:
         text: LuaLaTeX Guide
       - href: alt-text.qmd
         text: ALT Text
-      - about.qmd
+      - href: about.qmd
+        text: Contact
 
 format:
   html:

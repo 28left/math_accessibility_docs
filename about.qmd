@@ -1,5 +1,17 @@
 ---
-title: "About"
+title: "Contact"
 ---
 
-About this site
+## The Math Accessibility Team:
+
+- Jennifer Chubb
+- Emma Gruner
+- Eugene Henninger-Voss
+- Zhengqi Liu
+- Panchi Mei
+- Jan Reimann
+- Joey Veltri
+
+---
+
+For assistance with accessibility, contact [Jan Reimann](mailto:jan.reimann@psu.edu).
