@@ -144,7 +144,7 @@
     "href": "index.html#getting-help",
     "title": "Producing Accessible Documents with LaTeX",
     "section": "Getting help",
-    "text": "Getting help\nThe Math Accessibility Team is here to help.\nFor assistance, email Jan",
+    "text": "Getting help\nThe Math Accessibility Team is here to help.",
     "crumbs": [
       "Home"
     ]
@@ -337,26 +337,6 @@
     "text": "Additional Resources\n\nLuaLaTeX documentation (luatex.org)\nfontspec package documentation (CTAN)\nTeX Live Guide\nLaTeX Wikibook — LuaLaTeX chapter\nOverleaf LuaLaTeX documentation",
     "crumbs": [
       "LuaLaTeX Guide"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Contact",
-    "section": "",
-    "text": "Jennifer Chubb\nEmma Gruner\nEugene Henninger-Voss\nZhengqi Liu\nPanchi Mei\nJan Reimann\nJoey Veltri\n\n\nFor assistance with accessibility, contact Jan.",
-    "crumbs": [
-      "Contact"
-    ]
-  },
-  {
-    "objectID": "about.html#the-math-accessibility-team",
-    "href": "about.html#the-math-accessibility-team",
-    "title": "Contact",
-    "section": "",
-    "text": "Jennifer Chubb\nEmma Gruner\nEugene Henninger-Voss\nZhengqi Liu\nPanchi Mei\nJan Reimann\nJoey Veltri\n\n\nFor assistance with accessibility, contact Jan.",
-    "crumbs": [
-      "Contact"
     ]
   }
 ]
