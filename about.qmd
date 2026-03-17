@@ -2,16 +2,4 @@
 title: "Contact"
 ---
 
-## The Math Accessibility Team:
-
-- Jennifer Chubb
-- Emma Gruner
-- Eugene Henninger-Voss
-- Zhengqi Liu
-- Panchi Mei
-- Jan Reimann
-- Joey Veltri
-
----
-
-For assistance with accessibility, contact Jan.
+## The PSU Math Accessibility Team 

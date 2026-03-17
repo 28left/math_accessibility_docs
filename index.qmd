@@ -26,4 +26,3 @@ Before delving into details on LaTeX, here are **four core principles that alway
 
 The Math Accessibility Team is here to help.
 
-For assistance, email Jan
