@@ -14,4 +14,4 @@ title: "Contact"
 
 ---
 
-For assistance with accessibility, contact [Jan Reimann](mailto:jan.reimann@psu.edu).
+For assistance with accessibility, contact Jan.
