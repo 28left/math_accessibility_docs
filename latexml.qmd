@@ -21,8 +21,9 @@ flowchart LR
 ## Step 1. Conversion to HTML via LaTeXML
 
 To convert `example_1.tex` to an accessible HTML file, run the following command in a terminal
-```
-    latexmlc example_1.tex --dest=example_1.html
+
+```bash
+latexmlc example_1.tex --dest=example_1.html
 ```
 
 A message will be printed, listing possible failures in the conversion. Here's a [list of known failures]() and some [pre-conversion suggestions]() to better prepare tex file. See also [examples]() for things that are known to work well.
