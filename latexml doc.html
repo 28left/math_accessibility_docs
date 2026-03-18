@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Contact – Producing Accessible Documents with LaTeX</title>
+<title>latexml-doc – Producing Accessible Documents with LaTeX</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./alt-text.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -68,6 +67,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -82,7 +84,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./about.html">Contact</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Producing Accessible Documents with LaTeX
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,19 +132,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./latexcanvas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">LaTeX in Canvas</span></a>
+ <span class="menu-text">Using LaTeX in the CANVAS Editor</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tagged-pdf.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tagged PDFs</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./latexml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using LaTeXML</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -163,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link active">
+  <a href="./about.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contact</span></a>
   </div>
 </li>
@@ -177,34 +175,135 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-psu-math-accessibility-team" id="toc-the-psu-math-accessibility-team" class="nav-link active" data-scroll-target="#the-psu-math-accessibility-team">The PSU Math Accessibility Team</a></li>
+  <li><a href="#forewords" id="toc-forewords" class="nav-link active" data-scroll-target="#forewords">Forewords</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
+  <ul class="collapse">
+  <li><a href="#step-1.-conversion-to-html-via-latexml" id="toc-step-1.-conversion-to-html-via-latexml" class="nav-link" data-scroll-target="#step-1.-conversion-to-html-via-latexml">Step 1. Conversion to HTML via LaTeXML</a></li>
+  <li><a href="#step-2-add-to-canvas" id="toc-step-2-add-to-canvas" class="nav-link" data-scroll-target="#step-2-add-to-canvas">Step 2: Add to Canvas</a>
+  <ul class="collapse">
+  <li><a href="#copy-paste" id="toc-copy-paste" class="nav-link" data-scroll-target="#copy-paste">Copy-Paste</a></li>
+  <li><a href="#embed-html" id="toc-embed-html" class="nav-link" data-scroll-target="#embed-html">Embed HTML</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Contact</h1>
+
+
+
+<section id="forewords" class="level1">
+<h1>Forewords</h1>
+<p>This is a guide on how to use LaTeXML to convert tex files to html files for better accessibility. Please follow <a href="https://math.nist.gov/~BMiller/LaTeXML/get.html">the instructions</a> to install LaTeXML. Based on your system, you may need to pre-install something first.</p>
+</section>
+<section id="workflow" class="level1">
+<h1>Workflow</h1>
+<p>Flowchart:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A(*.tex File) --&gt; |LaTeXML| B(*.html)
+    B --&gt; |upload| C(Canvas Files)
+    C --&gt; |embed| D(Publish Canvas Page)
+    B --&gt; |copy-paste| D
+</pre>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="the-psu-math-accessibility-team" class="level2">
-<h2 class="anchored" data-anchor-id="the-psu-math-accessibility-team">The PSU Math Accessibility Team</h2>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="step-1.-conversion-to-html-via-latexml" class="level2">
+<h2 class="anchored" data-anchor-id="step-1.-conversion-to-html-via-latexml">Step 1. Conversion to HTML via LaTeXML</h2>
+<p>To convert <code>example_1.tex</code> to an accessible HTML file, run the following command in a terminal</p>
+<pre><code>    latexmlc example_1.tex --dest=example_1.html</code></pre>
+<p>A message will be printed, listing possible failures in the conversion. Here’s a <a href="">list of known failures</a> and some <a href="">pre-conversion suggestions</a> to better prepare tex file. See also <a href="">examples</a> for things that are known to work well.</p>
+<p>It will always creates a usable <code>example_1.html</code>, alongside two more css-file, <code>LaTeXML.css</code> and <code>ltx-article.css</code>, and a log file. You may open the HTML file with a browswer to see if everything is correctly formatted.</p>
+</section>
+<section id="step-2-add-to-canvas" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-add-to-canvas">Step 2: Add to Canvas</h2>
+<p>There are two methods of creating a Canvas Page.</p>
+<section id="copy-paste" class="level3">
+<h3 class="anchored" data-anchor-id="copy-paste">Copy-Paste</h3>
+<p><strong>Instructions</strong>:</p>
+<ol type="1">
+<li>Open the HTML file in a text editor</li>
+<li>Select everything and copy.</li>
+<li>Go to the canvas course page, and create a New Page under the Page tab.</li>
+<li>Click the <code>&lt;/&gt;</code> icon to switch to HTML Editor and paste the contents there. (See the figure below.)</li>
+<li>You may save the page to preview and switch back to the Canvas’s Rice Content Editor to fix formatting issues and to add links to files and images.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_1_canvas_html_editor.png" class="img-fluid figure-img" width="600"></p>
+<figcaption>Figure 1: HTML Editor in Canvas Page</figcaption>
+</figure>
+</div>
+<ul>
+<li>Pros:
+<ul>
+<li>Simple</li>
+<li>Easier for future edits</li>
+</ul></li>
+<li>Cons:
+<ul>
+<li>Links to files and images (e.g.&nbsp;<code>\includegraphics</code>) need to be manually fixed</li>
+</ul></li>
+</ul>
+</section>
+<section id="embed-html" class="level3">
+<h3 class="anchored" data-anchor-id="embed-html">Embed HTML</h3>
+<p>This is a workaround to have HTML rendered by the CSS files created by LaTeXML and to have images rendered automatically,</p>
+<p><strong>Instructions</strong>:</p>
+<ol class="example" type="1">
+<li><p>Go to the canvas course page, and create a New Page under the Page tab.</p></li>
+<li><p>Click the <code>&lt;/&gt;</code> icon to switch to HTML Editor (See Figure 1) and paste the following</p>
+<pre><code>    &lt;p&gt;&lt;iframe src="LINK_TO_BE_ADDED" width="100%" height="1000" &gt;&lt;/iframe&gt;&lt;/p&gt;</code></pre></li>
+<li><p>Upload the HTML file, CSS files, images to a folder on canvas</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_2_canvas_file_page.png" class="img-fluid figure-img" width="250"></p>
+<figcaption>Figure 2: Canvas Files Page</figcaption>
+</figure>
+</div>
+<ol start="4" class="example" type="1">
+<li>Click on the HTML file to preview</li>
+<li>On the top-right corner, right-click the download icon to copy the download link <code>https://psu.instructure.com/files/123456789/download?download_frd=1&amp;verifier=abc123123ABCABC</code> (See Figure 3)</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_3_download_link.png" class="img-fluid figure-img" width="600"></p>
+<figcaption>Figure 3: Copy Download Link</figcaption>
+</figure>
+</div>
+<ol start="6" class="example" type="1">
+<li><p>Paste everything in the link up to and including <code>?</code> to iframe in the HTML Editor of the canvas page. It should now appear like</p>
+<pre><code>    &lt;p&gt;&lt;iframe src="https://psu.instructure.com/files/123456789/download?" width="100%" height="1000" &gt;&lt;/iframe&gt;&lt;/p&gt;</code></pre></li>
+<li><p>Save to preview the Canvas Page. You may adjust the height of the iframe box to avoid a scroll bar on the box.</p></li>
+</ol>
+<ul>
+<li>Pros:
+<ul>
+<li>Style consistent with tex-pdf</li>
+<li>Image links work automatically</li>
+</ul></li>
+<li>Cons:
+<ul>
+<li>This is only a workaround to embed html in Canvas Page.</li>
+<li>HTML also can be previewed directly in Files.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="examples" class="level1">
+<h1>Examples</h1>
 
 
 </section>
@@ -282,7 +381,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/28left\.github\.io\/math_accessibility_docs\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -609,15 +708,6 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./alt-text.html" class="pagination-link" aria-label="ALT Text">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ALT Text</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
