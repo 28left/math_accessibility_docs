@@ -12,7 +12,7 @@ I have some short math content (e.g. solution to a homework problem) that I woul
 There are basically two options:
 
 **=>** [Prepare your LaTeX source for tagging and produce a tagged PDF using `LuaLaTeX`.](tagged-pdf.qmd) <br>
-**=>** Use `LaTeXML` to produce an html file instead of PDF.
+**=>** Use [`LaTeXML` to produce an html file and post it as a Page on Canvas](latexml.qmd).
 
 
 ## I have Beamer slides that I use for lectures and also post them on Canvas (or on other sites).
