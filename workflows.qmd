@@ -2,9 +2,9 @@
 
 ## I just want to get some quick info into Canvas.
 
-I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formating for formulas (using `$ .. $` or `\[ .. \]`), it does not need any LaTeX.
+I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using `\( .. \) $` or `\[ .. \]`), it does not need any LaTeX.
 
-**=>** Enter the text directly in the Canvas editor.
+**=>** Enter the text [directly in the Canvas editor](latexcanvas.qmd).
 
 
 ## I have LaTeX files that I compile as PDFs and post them on Canvas (or other sites).

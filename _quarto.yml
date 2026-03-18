@@ -15,8 +15,12 @@ website:
         text: General Principles
       - href: workflows.qmd
         text: Workflows
+      - href: latexcanvas.qmd
+        text: LaTeX in Canvas
       - href: tagged-pdf.qmd
         text: Tagged PDFs
+      - href: latexml.qmd
+        text: Using LaTeXML
       - href: slides.qmd
         text: Slides
       - href: lualatex-guide.qmd

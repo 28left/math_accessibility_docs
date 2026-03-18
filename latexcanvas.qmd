@@ -1,0 +1,111 @@
+# Using LaTeX in the CANVAS Editor
+
+## Entering math formulas
+
+Use the delimiters `\( ... \)` to typeset in-line math and the delimiters `\[ ... \]` to typeset display math. For example, the syntax below
+
+```latex
+To solve the equation \(x^2 - 3x - 4 = 0\), we can use the quadratic formula
+ \[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}.\]
+```
+
+produces the following output in CANVAS after saving:
+
+
+>To solve the equation $x^2 - 3x - 4 = 0$, we can use the quadratic formula $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}.$$
+
+
+However, not all LaTeX features and packages are supported by the CANVAS compiler. We have collected some general guidelines below, as well as links to some additional resources.
+
+
+## Supported Features
+
+::: {.callout-tip}
+1. Basic mathematical symbols and commands
+
+2. Symbols and commands from the packages amsmath and amssymb
+
+3. Basic mathematical environments, as well as environments from the package amsmath (e.g. `\begin{matrix}`, `\begin{array}`, `\begin{equation}`, and `begin{align}`)
+
+4. Fonts from the package amsfonts, such as `\mathbb{...}` and `\mathcal{...}`
+
+5. Text styling commands (such as `\textbf{...}`, `\textit{...}`, and `\color{...}{...}`), when used *inside* in-line or display math mode
+
+6. Nomenclature related commands (such as `\def` or `\newcommand`), when used *inside* in-line or display math mode
+
+{{< pagebreak >}}
+:::
+
+## Unsupported Features
+
+::: {.callout-important}
+1. Document structure or appearance commands, such as `\section` or `\vspace{...}`
+
+2. Organizational environments, such as `\begin{itemize}`, `\begin{enumerate}`, and `\begin{tabular}`
+
+3. Environments from the packages amsthm or graphicx
+
+4. Most commands, settings, or adjustments that would normally be included in the preamble of a .tex file, with some exceptions (e.g. see the remark on `\newcommand` under the Supported Features list)
+
+5. Text styling commands when used *outside* in-line or display math mode
+:::
+
+
+## Other Comments
+
+1. As mentioned above, only the delimiters `\(...\)` will cause in-line math to render. The standard dollar sign delimiters `$...$` will not work, nor will `\begin{math}`
+
+2. For display math, the double dollar signs `$$...$$` will sometimes render, but other times it may cause issues for the CANVAS compiler. The delimiters `\[...\]` are preferable. The environment `\begin{displaymath}` does not render.
+
+3. When working within an environment like `\begin{matrix}`, do not enter between your desired rows. For example, the matrix $$\begin{matrix} 0 & 1 \\ 1 & 0 \end{matrix} $$ should be typeset as 
+
+    ```latex
+    \begin{matrix} 0 & 1 \\ 1 & 0 \end{matrix}
+    ```
+
+    as opposed to
+
+    ```latex
+    \begin{matrix} 
+    0 & 1 \\ 
+    1 & 0 
+    \end{matrix}
+    ```
+
+4. For math environments in display mode, delimiters are optional. For example, both 
+
+    ```latex
+    \begin{matrix} 0 & 1 \\ 1 & 0 \end{matrix}
+    ```
+    and 
+
+    ```latex
+    \[ \begin{matrix} 0 & 1 \\ 1 & 0 \end{matrix} \]
+    ```
+    will render.
+
+5. The environment `\begin{equation}` and related environments will still render, but CANVAS does not support the numbering or reference feature. 
+
+6. In general, due to these formatting differences the best way to use the LaTeX CANVAS editor is to type directly into it, versus copying and pasting from another source. If you have a preexisting .tex file that you want to convert to an accessible format, please see our dedicated resources.
+
+
+## MathJaX Resources
+
+Since CANVAS uses MathJaX to render LaTeX, most information about MathJaX syntax is applicable to this setting. However, unlike someone who is authoring an HTML page from scratch, the CANVAS user cannot edit the page's MathJaX configuration to load additional packages or extensions. Therefore, the only packages available for use in CANVAS are those which are included in the default MathJaX configuration. 
+
+Also, CANVAS currently uses MathJaX version 2.7.7., so some newer features may not be supported.
+
+Subject to these caveats, the following documentation pages from the official MathJaX site may be of use:
+
+* TeX and LaTeX Support: <https://docs.mathjax.org/en/latest/input/tex/index.html>
+
+* Differences from Actual TeX: <https://docs.mathjax.org/en/latest/input/tex/differences.html>
+
+* TeX and LaTeX Math Delimiters: <https://docs.mathjax.org/en/latest/input/tex/delimiters.html>
+
+* Supported TeX/LaTeX Commands: <https://docs.mathjax.org/en/latest/input/tex/macros/index.html>
+
+
+
+
+
