@@ -262,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-1.-conversion-to-html-via-latexml" class="level2">
 <h2 class="anchored" data-anchor-id="step-1.-conversion-to-html-via-latexml">Step 1. Conversion to HTML via LaTeXML</h2>
 <p>To convert <code>example_1.tex</code> to an accessible HTML file, run the following command in a terminal</p>
-<pre><code>    latexmlc example_1.tex --dest=example_1.html</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">latexmlc</span> example_1.tex <span class="at">--dest</span><span class="op">=</span>example_1.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A message will be printed, listing possible failures in the conversion. Here’s a <a href="">list of known failures</a> and some <a href="">pre-conversion suggestions</a> to better prepare tex file. See also <a href="">examples</a> for things that are known to work well.</p>
 <p>It will always creates a usable <code>example_1.html</code>, alongside two more css-file, <code>LaTeXML.css</code> and <code>ltx-article.css</code>, and a log file. You may open the HTML file with a browswer to see if everything is correctly formatted.</p>
 </section>
