@@ -222,6 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#add-alt-text-to-images" id="toc-add-alt-text-to-images" class="nav-link" data-scroll-target="#add-alt-text-to-images">5. Add Alt Text to Images</a></li>
   <li><a href="#check-color-contrast" id="toc-check-color-contrast" class="nav-link" data-scroll-target="#check-color-contrast">6. Check Color Contrast</a></li>
   <li><a href="#summary-checklist" id="toc-summary-checklist" class="nav-link" data-scroll-target="#summary-checklist">Summary Checklist</a></li>
+  <li><a href="#incompatible-packages" id="toc-incompatible-packages" class="nav-link" data-scroll-target="#incompatible-packages">Incompatible Packages</a></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
   </ul></li>
   </ul>
@@ -420,6 +421,25 @@ Sufficient contrast
 </tr>
 </tbody>
 </table>
+</section>
+<section id="incompatible-packages" class="level2">
+<h2 class="anchored" data-anchor-id="incompatible-packages">Incompatible Packages</h2>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The LaTeX Tagging Project is in active development. Many popular packages are not (yet) compatible. LuaLaTeX will often not compile at all.</p>
+<p>You can see the current status of packages here: <a href="https://latex3.github.io/tagging-project/tagging-status/">Taging Status of LaTeX Packages and Classes</a></p>
+</div>
+</div>
+<p>If you run into incompatibilities, try to find a workaround using packages that are supported.</p>
+<p>For example (as of March 16, 2026), both <code>enumerate</code> and <code>enumitem</code> are not fully compatible. You can use <code>enumext</code> instead, but the syntax of your enumeration environments will need to be slightly adjusted.</p>
 </section>
 <section id="further-reading" class="level2">
 <h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
