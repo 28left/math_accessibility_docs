@@ -130,6 +130,22 @@ Use a [color contrast checker](https://webaim.org/resources/contrastchecker/) to
 | 5 | `alt={...}` in every `\includegraphics` |
 | 6 | Verify color contrast ratios |
 
+
+## Incompatible Packages
+
+::: {.callout-important}
+## Warning
+
+The LaTeX Tagging Project is in active development. Many popular packages are not (yet) compatible. LuaLaTeX will often not compile at all.
+
+You can see the current status of packages here: [Taging Status of LaTeX Packages and Classes](https://latex3.github.io/tagging-project/tagging-status/)
+:::
+
+If you run into incompatibilities, try to find a workaround using packages that are supported.
+
+For example (as of March 16, 2026), both `enumerate` and `enumitem` are not fully compatible. You can use `enumext` instead, but the syntax of your enumeration environments will need to be slightly adjusted.
+
+
 ## Further Reading
 
 - [LaTeX Tagging Project](https://latex3.github.io/tagging-project/) — official documentation and ongoing development
