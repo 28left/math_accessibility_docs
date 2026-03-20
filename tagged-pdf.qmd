@@ -135,7 +135,7 @@ Use a [color contrast checker](https://webaim.org/resources/contrastchecker/) to
 
 ## Template
 
-Here is a minimal template you can use as a starting point for your documents. As you add more packages, **be aware of incompatibiltities**.
+Here is a minimal template you can use as a starting point for your documents. 
 
 ```latex
 \DocumentMetadata{
@@ -172,6 +172,8 @@ A matrix equation.
 
 \end{document}
 ```
+
+As you add more packages, **be aware of incompatibiltities**.
 
 
 ## Incompatible Packages
