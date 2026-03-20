@@ -8,7 +8,7 @@ Before delving into details on LaTeX, here are **four core principles that alway
 
 ## General Principles for Accessibility
 
--   Whenever possible, use **structural elements** to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables. 
+-   Whenever possible, use **structural elements** to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables. If available, start from a **template**. 
 
 -   **Don’t use color as the only way to communicate information.** If you are using colors, make sure to have **sufficient contrast**.
 
