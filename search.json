@@ -330,8 +330,8 @@
     ]
   },
   {
-    "objectID": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-them-on-canvas-or-other-sites.",
-    "href": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-them-on-canvas-or-other-sites.",
+    "objectID": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-on-canvas-or-other-sites.",
+    "href": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-on-canvas-or-other-sites.",
     "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
     "text": "There are basically two options:\n=&gt; Prepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX.  =&gt; Use LaTeXML to produce an html file and post it as a Page on Canvas.",
@@ -340,8 +340,8 @@
     ]
   },
   {
-    "objectID": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-them-on-canvas-or-on-other-sites.",
-    "href": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-them-on-canvas-or-on-other-sites.",
+    "objectID": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-on-canvas-or-other-sites.",
+    "href": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-on-canvas-or-other-sites.",
     "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
     "text": "=&gt; Use ltx-talk instead of Beamer.",
