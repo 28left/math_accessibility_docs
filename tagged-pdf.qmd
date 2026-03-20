@@ -47,6 +47,8 @@ For the title, use whichever is present in the document:
 - The argument of `\header{...}`, or
 - A descriptive title inferred from the document content.
 
+
+
 ## 4. Tag Tables
 
 If the document contains tables, each table needs its header rows or columns identified. Add a `\tagpdfsetup` call immediately before the relevant `tabular` environment:
@@ -131,6 +133,47 @@ Use a [color contrast checker](https://webaim.org/resources/contrastchecker/) to
 | 6 | Verify color contrast ratios |
 
 
+## Template
+
+Here is a minimal template you can use as a starting point for your documents. As you add more packages, **be aware of incompatibiltities**.
+
+```latex
+\DocumentMetadata{
+tagging=on,
+pdfstandard=ua-2,
+lang=en,
+tagging-setup = {math/setup=mathml-SE}
+}
+\tagpdfsetup{math/alt/use}
+
+\documentclass{article}
+\usepackage{unicode-math}
+
+\usepackage{hyperref}
+\hypersetup{
+pdftitle={Test},
+pdfauthor={Test Test},
+pdfsubject={Testsubject}
+}
+
+\begin{document}
+
+\section{Basic mathematical expressions}
+
+If $x$ is real, then $x^{2} \geq 0$.
+
+A matrix equation.
+\[
+\begin{pmatrix}0&1\\1&0\end{pmatrix}
+\begin{pmatrix}a&b\\c&d\end{pmatrix}
+=
+\begin{pmatrix}c&d\\a&b\end{pmatrix}
+\]
+
+\end{document}
+```
+
+
 ## Incompatible Packages
 
 ::: {.callout-important}
@@ -144,6 +187,7 @@ You can see the current status of packages here: [Taging Status of LaTeX Package
 If you run into incompatibilities, try to find a workaround using packages that are supported.
 
 For example (as of March 16, 2026), both `enumerate` and `enumitem` are not fully compatible. You can use `enumext` instead, but the syntax of your enumeration environments will need to be slightly adjusted.
+
 
 
 ## Further Reading
