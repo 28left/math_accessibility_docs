@@ -22,7 +22,7 @@ Before delving into details on LaTeX, here are **four core principles that alway
 **=>** On the [Workflows page](workflows.qmd), you can find links to instructions specific to the kind of document you want to produce.
 
 
-## Getting help
+<!-- ## Getting help
 
 The Math Accessibility Team is here to help.
-
+ -->
