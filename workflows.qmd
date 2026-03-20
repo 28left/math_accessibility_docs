@@ -7,7 +7,7 @@ I have some short math content (e.g. solution to a homework problem) that I woul
 **=>** Enter the text [directly in the Canvas editor](latexcanvas.qmd).
 
 
-## I have LaTeX files that I compile as PDFs and post them on Canvas (or other sites).
+## I have LaTeX files that I compile as PDFs and post on Canvas (or other sites).
 
 There are basically two options:
 
@@ -15,7 +15,7 @@ There are basically two options:
 **=>** Use [`LaTeXML` to produce an html file and post it as a Page on Canvas](latexml.qmd).
 
 
-## I have Beamer slides that I use for lectures and also post them on Canvas (or on other sites).
+## I have Beamer slides that I use for lectures and also post on Canvas (or other sites).
 
 **=>** [Use `ltx-talk` instead of Beamer.](slides.qmd)
 
