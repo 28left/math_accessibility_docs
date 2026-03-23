@@ -209,11 +209,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#from-beamer-to-ltx-talk" id="toc-from-beamer-to-ltx-talk" class="nav-link active" data-scroll-target="#from-beamer-to-ltx-talk">From <code>beamer</code> to <code>ltx-talk</code></a></li>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#minimal-document-structure" id="toc-minimal-document-structure" class="nav-link" data-scroll-target="#minimal-document-structure">Minimal Document Structure</a></li>
+  <li><a href="#minimal-document-structure" id="toc-minimal-document-structure" class="nav-link" data-scroll-target="#minimal-document-structure">Minimal Document Structure</a>
+  <ul class="collapse">
+  <li><a href="#activate-tagging" id="toc-activate-tagging" class="nav-link" data-scroll-target="#activate-tagging">Activate tagging</a></li>
+  <li><a href="#adjust-headings-level-canvas-ally" id="toc-adjust-headings-level-canvas-ally" class="nav-link" data-scroll-target="#adjust-headings-level-canvas-ally">Adjust headings level (Canvas Ally)</a></li>
+  </ul></li>
   <li><a href="#what-changes-for-beamer-users" id="toc-what-changes-for-beamer-users" class="nav-link" data-scroll-target="#what-changes-for-beamer-users">What Changes for Beamer Users</a>
   <ul class="collapse">
   <li><a href="#the-document-class" id="toc-the-document-class" class="nav-link" data-scroll-target="#the-document-class">The Document Class</a></li>
   <li><a href="#preamble-fonts-and-encoding" id="toc-preamble-fonts-and-encoding" class="nav-link" data-scroll-target="#preamble-fonts-and-encoding">Preamble: Fonts and Encoding</a></li>
+  <li><a href="#title-slide-use-maketitle" id="toc-title-slide-use-maketitle" class="nav-link" data-scroll-target="#title-slide-use-maketitle">Title Slide: Use <code>\maketitle</code></a></li>
   <li><a href="#slides-frame-works-as-before" id="toc-slides-frame-works-as-before" class="nav-link" data-scroll-target="#slides-frame-works-as-before">Slides: <code>frame</code> Works as Before</a></li>
   <li><a href="#overlays-and-pauses" id="toc-overlays-and-pauses" class="nav-link" data-scroll-target="#overlays-and-pauses">Overlays and Pauses</a></li>
   <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
@@ -257,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p>Full documentation: <a href="https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/ltx-talk/ltx-talk.pdf" class="uri">https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/ltx-talk/ltx-talk.pdf</a></p>
-<p>For a broader discussion of accessible LaTeX slides, see David Eppstein’s post <a href="https://11011110.github.io/blog/2026/03/01/making-accessible-latex.html"><em>Making Accessible LaTeX</em></a>.</p>
+<p>For a broader discussion of accessible LaTeX slides, see David Eppstein’s post <a href="https://11011110.github.io/blog/2026/03/01/making-accessible-latex.html"><em>Making Accessible LaTeX talk slides</em></a>.</p>
 </div>
 </div>
 </div>
@@ -295,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\titlepage</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\maketitle</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}{Introduction}</span>
@@ -308,52 +313,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Compile with:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lualatex</span> presentation.tex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="activate-tagging" class="level3">
+<h3 class="anchored" data-anchor-id="activate-tagging">Activate tagging</h3>
+<p>To create a tagged pdf with enhanced accessibility features, add the necessary preamble at the top of the document:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\DocumentMetadata</span>{</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    tagging=on,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    pdfstandard=ua-2,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    lang=en,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    tagging-setup = {math/setup=mathml-SE}</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\tagpdfsetup</span>{math/alt/use} <span class="co">% This line is only to force Canvas Ally compliance. </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">% It does NOT improve accessibility.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="adjust-headings-level-canvas-ally" class="level3">
+<h3 class="anchored" data-anchor-id="adjust-headings-level-canvas-ally">Adjust headings level (Canvas Ally)</h3>
+<p>The Canvas Ally checker might complain that</p>
+<blockquote class="blockquote">
+<p>“The headings in this PDF do not begin at level 1.”</p>
+</blockquote>
+<p>In this case, add</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\AtBeginDocument</span>{<span class="fu">\tagpdfsetup</span>{role/new-tag=frametitle/H1}}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>before <code>\documentclass</code>.</p>
 <hr>
+</section>
 </section>
 <section id="what-changes-for-beamer-users" class="level2">
 <h2 class="anchored" data-anchor-id="what-changes-for-beamer-users">What Changes for Beamer Users</h2>
 <section id="the-document-class" class="level3">
 <h3 class="anchored" data-anchor-id="the-document-class">The Document Class</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Before (Beamer)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[aspectratio=169]{<span class="ex">beamer</span>}</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">% After (ltx-talk)</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>{<span class="ex">ltx-talk</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Before (Beamer)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[aspectratio=169]{<span class="ex">beamer</span>}</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">% After (ltx-talk)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>{<span class="ex">ltx-talk</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Options such as <code>aspectratio</code> are passed the same way. Check the <code>ltx-talk</code> documentation for the full list of supported class options.</p>
 </section>
 <section id="preamble-fonts-and-encoding" class="level3">
 <h3 class="anchored" data-anchor-id="preamble-fonts-and-encoding">Preamble: Fonts and Encoding</h3>
 <p>With Beamer + pdfLaTeX, a typical preamble includes:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[T1]{<span class="ex">fontenc</span>}</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[utf8]{<span class="ex">inputenc</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[T1]{<span class="ex">fontenc</span>}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[utf8]{<span class="ex">inputenc</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>With <code>ltx-talk</code> + LuaLaTeX these are <strong>not needed</strong> and should be removed. Use <code>fontspec</code> instead to select fonts:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>}</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\setmainfont</span>{Latin Modern Sans}  <span class="co">% or any OpenType/TrueType font</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>{<span class="ex">fontspec</span>}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\setmainfont</span>{Latin Modern Sans}  <span class="co">% or any OpenType/TrueType font</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="title-slide-use-maketitle" class="level3">
+<h3 class="anchored" data-anchor-id="title-slide-use-maketitle">Title Slide: Use <code>\maketitle</code></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Before (Beamer)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\titlepage</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">% After (ltx-talk)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\maketitle</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="slides-frame-works-as-before" class="level3">
 <h3 class="anchored" data-anchor-id="slides-frame-works-as-before">Slides: <code>frame</code> Works as Before</h3>
 <p>The <code>frame</code> environment is kept intentionally compatible:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Works the same in ltx-talk</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}{Slide Title}</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  Content here.</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Works the same in ltx-talk</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}{Slide Title}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  Content here.</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or alternatively</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\frametitle</span>{Slide Title}</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  Content here.</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Short-title and <code>fragile</code> options are also supported:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}[fragile]{Code Example}</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">\begin</span>{<span class="ex">verbatim</span>}</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    print("hello")</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="vs">  </span><span class="kw">\end</span>{<span class="ex">verbatim</span>}</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}[fragile]{Code Example}</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">\begin</span>{<span class="ex">verbatim</span>}</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    print("hello")</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="vs">  </span><span class="kw">\end</span>{<span class="ex">verbatim</span>}</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="overlays-and-pauses" class="level3">
 <h3 class="anchored" data-anchor-id="overlays-and-pauses">Overlays and Pauses</h3>
 <p>Basic overlay commands work:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}{Step by Step}</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">\begin</span>{<span class="ex">itemize</span>}</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\item</span>&lt;1-&gt; Always visible</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\item</span>&lt;2-&gt; Appears on step 2</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\item</span>&lt;3-&gt; Appears on step 3</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">\end</span>{<span class="ex">itemize</span>}</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">frame</span>}{Step by Step}</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">\begin</span>{<span class="ex">itemize</span>}</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\item</span>&lt;1-&gt; Always visible</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\item</span>&lt;2-&gt; Appears on step 2</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\item</span>&lt;3-&gt; Appears on step 3</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">\end</span>{<span class="ex">itemize</span>}</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">frame</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-warning no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -368,23 +413,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="themes" class="level3">
 <h3 class="anchored" data-anchor-id="themes">Themes</h3>
 <p><code>ltx-talk</code> has its own theming system, separate from Beamer themes. Beamer theme commands (<code>\usetheme</code>, <code>\usecolortheme</code>, etc.) <strong>do not work</strong>. Use <code>ltx-talk</code>’s own options instead:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[theme=...]{<span class="ex">ltx-talk</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[theme=...]{<span class="ex">ltx-talk</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>See the package documentation for available themes and customization options.</p>
 </section>
 <section id="blocks" class="level3">
 <h3 class="anchored" data-anchor-id="blocks">Blocks</h3>
 <p>Standard Beamer block environments are available:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">block</span>}{Definition}</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  A graph is a set of vertices and edges.</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">block</span>}</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">alertblock</span>}{Warning}</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  This approach has known limitations.</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">alertblock</span>}</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">exampleblock</span>}{Example}</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  Consider the complete graph <span class="ss">$K_5$</span>.</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">exampleblock</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">block</span>}{Definition}</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  A graph is a set of vertices and edges.</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">block</span>}</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">alertblock</span>}{Warning}</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  This approach has known limitations.</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">alertblock</span>}</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">exampleblock</span>}{Example}</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  Consider the complete graph <span class="ss">$K_5$</span>.</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">exampleblock</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="what-to-remove-from-your-beamer-preamble" class="level3">
 <h3 class="anchored" data-anchor-id="what-to-remove-from-your-beamer-preamble">What to Remove from Your Beamer Preamble</h3>
