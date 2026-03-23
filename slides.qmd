@@ -11,7 +11,7 @@ title: "Slides"
 ::: {.callout-note}
 Full documentation: <https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/ltx-talk/ltx-talk.pdf>
 
-For a broader discussion of accessible LaTeX slides, see David Eppstein's post [*Making Accessible LaTeX*](https://11011110.github.io/blog/2026/03/01/making-accessible-latex.html).
+For a broader discussion of accessible LaTeX slides, see David Eppstein's post [*Making Accessible LaTeX talk slides*](https://11011110.github.io/blog/2026/03/01/making-accessible-latex.html).
 :::
 
 ---
@@ -51,7 +51,7 @@ A minimal `ltx-talk` presentation looks like this:
 \begin{document}
 
 \begin{frame}
-  \titlepage
+  \maketitle
 \end{frame}
 
 \begin{frame}{Introduction}
@@ -69,6 +69,35 @@ Compile with:
 ```bash
 lualatex presentation.tex
 ```
+
+### Activate tagging
+
+To create a tagged pdf with enhanced accessibility features, add the necessary preamble at the top of the document:
+
+```latex
+\DocumentMetadata{
+    tagging=on,
+    pdfstandard=ua-2,
+    lang=en,
+    tagging-setup = {math/setup=mathml-SE}
+}
+\tagpdfsetup{math/alt/use} % This line is only to force Canvas Ally compliance. 
+% It does NOT improve accessibility.
+```
+
+### Adjust headings level (Canvas Ally)
+
+The Canvas Ally checker might complain that 
+
+> "The headings in this PDF do not begin at level 1."
+
+In this case, add
+
+```latex
+\AtBeginDocument{\tagpdfsetup{role/new-tag=frametitle/H1}}
+``` 
+
+before `\documentclass`.
 
 ---
 
@@ -102,6 +131,20 @@ With `ltx-talk` + LuaLaTeX these are **not needed** and should be removed. Use `
 \setmainfont{Latin Modern Sans}  % or any OpenType/TrueType font
 ```
 
+### Title Slide: Use `\maketitle`
+
+```latex
+% Before (Beamer)
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% After (ltx-talk)
+\begin{frame}
+    \maketitle
+\end{frame}
+```
+
 ### Slides: `frame` Works as Before
 
 The `frame` environment is kept intentionally compatible:
@@ -109,6 +152,16 @@ The `frame` environment is kept intentionally compatible:
 ```latex
 % Works the same in ltx-talk
 \begin{frame}{Slide Title}
+  Content here.
+\end{frame}
+```
+
+or alternatively
+
+```latex
+\begin{frame}
+  \frametitle{Slide Title}
+
   Content here.
 \end{frame}
 ```

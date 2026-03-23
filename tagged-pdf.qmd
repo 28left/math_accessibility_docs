@@ -17,7 +17,8 @@ At the very **top of the file** — before `\documentclass` — add the followin
     lang=en,
     tagging-setup = {math/setup=mathml-SE}
 }
-\tagpdfsetup{math/alt/use}
+\tagpdfsetup{math/alt/use} % This line is only to force Canvas Ally compliance. 
+% It does NOT improve accessibility.
 ```
 
 This enables tagging, sets the PDF/UA-2 accessibility standard, declares the document language, and configures math tagging via MathML.
