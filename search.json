@@ -154,7 +154,7 @@
     "href": "index.html#next-steps",
     "title": "Producing Accessible Documents with LaTeX",
     "section": "Next steps",
-    "text": "Next steps\n=&gt; Some examples of good and bad LaTeX usage.\n=&gt; On the Workflows page, you can find links to instructions specific to the kind of document you want to produce.",
+    "text": "Next steps\n\nSome examples of good and bad LaTeX usage.\n\nOn the Workflows page, you can find links to instructions specific to the kind of document you want to produce.",
     "crumbs": [
       "Home"
     ]
@@ -334,7 +334,7 @@
     "href": "workflows.html",
     "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using \\( .. \\) $ or \\[ .. \\]), it does not need any LaTeX.\n=&gt; Enter the text directly in the Canvas editor.\n\n\n\nThere are basically two options:\n=&gt; Prepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX.  =&gt; Use LaTeXML to produce an html file and post it as a Page on Canvas.\n\n\n\n=&gt; Use ltx-talk instead of Beamer.\n\n\n\nYou can try one of the modern, powerful, and versatile publishing frameworks, such as:\n=&gt; PreText  =&gt; Quarto",
+    "text": "I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using \\( .. \\) $ or \\[ .. \\]), it does not need any LaTeX.\n\nEnter the text directly in the Canvas editor.\n\n\n\n\nThere are basically two options:\n\nPrepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX. \nUse LaTeXML to produce an html file and post it as a Page on Canvas.\n\n\n\n\n\nUse ltx-talk instead of Beamer.\n\n\n\n\nYou can try one of the modern, powerful, and versatile publishing frameworks, such as:\n\nPreText \nQuarto",
     "crumbs": [
       "Workflows"
     ]
@@ -344,7 +344,7 @@
     "href": "workflows.html#i-just-want-to-get-some-quick-info-into-canvas.",
     "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using \\( .. \\) $ or \\[ .. \\]), it does not need any LaTeX.\n=&gt; Enter the text directly in the Canvas editor.",
+    "text": "I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using \\( .. \\) $ or \\[ .. \\]), it does not need any LaTeX.\n\nEnter the text directly in the Canvas editor.",
     "crumbs": [
       "Workflows"
     ]
@@ -354,7 +354,7 @@
     "href": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-on-canvas-or-other-sites.",
     "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "There are basically two options:\n=&gt; Prepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX.  =&gt; Use LaTeXML to produce an html file and post it as a Page on Canvas.",
+    "text": "There are basically two options:\n\nPrepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX. \nUse LaTeXML to produce an html file and post it as a Page on Canvas.",
     "crumbs": [
       "Workflows"
     ]
@@ -364,7 +364,7 @@
     "href": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-on-canvas-or-other-sites.",
     "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "=&gt; Use ltx-talk instead of Beamer.",
+    "text": "Use ltx-talk instead of Beamer.",
     "crumbs": [
       "Workflows"
     ]
@@ -374,7 +374,7 @@
     "href": "workflows.html#i-have-an-extensive-set-of-lecture-notes-and-would-like-to-turn-them-into-an-interactive-ebook-hosted-on-the-web.",
     "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "You can try one of the modern, powerful, and versatile publishing frameworks, such as:\n=&gt; PreText  =&gt; Quarto",
+    "text": "You can try one of the modern, powerful, and versatile publishing frameworks, such as:\n\nPreText \nQuarto",
     "crumbs": [
       "Workflows"
     ]
