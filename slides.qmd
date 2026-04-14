@@ -40,6 +40,13 @@ Remember to set your editor or build tool to use LuaLaTeX (see the companion gui
 A minimal `ltx-talk` presentation looks like this:
 
 ```latex
+\DocumentMetadata{
+    tagging=on,
+    pdfstandard=ua-2,
+    lang=en,
+    tagging-setup = {math/setup=mathml-SE}
+}
+
 \documentclass{ltx-talk}
 
 \usepackage{fontspec}   % OpenType fonts — replaces inputenc/fontenc

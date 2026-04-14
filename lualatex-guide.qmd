@@ -204,9 +204,7 @@ It supports Unicode natively: café, naïve, Ångström, 日本語.
 \section{Lua Scripting}
 
 The answer to life is
-\begin{luacode}
-tex.sprint(6 * 7)
-\end{luacode}.
+\directlua{tex.sprint(6 * 7)}.
 
 \end{document}
 ```

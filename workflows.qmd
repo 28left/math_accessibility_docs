@@ -4,26 +4,26 @@
 
 I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using `\( .. \) $` or `\[ .. \]`), it does not need any LaTeX.
 
-**=>** Enter the text [directly in the Canvas editor](latexcanvas.qmd).
+- Enter the text [directly in the Canvas editor](latexcanvas.qmd).
 
 
 ## I have LaTeX files that I compile as PDFs and post on Canvas (or other sites).
 
 There are basically two options:
 
-**=>** [Prepare your LaTeX source for tagging and produce a tagged PDF using `LuaLaTeX`.](tagged-pdf.qmd) <br>
-**=>** Use [`LaTeXML` to produce an html file and post it as a Page on Canvas](latexml.qmd).
+- [Prepare your LaTeX source for tagging and produce a tagged PDF using `LuaLaTeX`.](tagged-pdf.qmd) <br>
+- Use [`LaTeXML` to produce an html file and post it as a Page on Canvas](latexml.qmd).
 
 
 ## I have Beamer slides that I use for lectures and also post on Canvas (or other sites).
 
-**=>** [Use `ltx-talk` instead of Beamer.](slides.qmd)
+- [Use `ltx-talk` instead of Beamer.](slides.qmd)
 
 
 ## I have an extensive set of lecture notes and would like to turn them into an interactive ebook hosted on the web.
 
 You can try one of the modern, powerful, and versatile publishing frameworks, such as:
 
-**=>** [PreText](https://pretextbook.org/) <br>
-**=>** [Quarto](https://quarto.org)
+- [PreText](https://pretextbook.org/) <br>
+- [Quarto](https://quarto.org)
 
