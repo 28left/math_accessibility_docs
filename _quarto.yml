@@ -27,6 +27,8 @@ website:
         text: LuaLaTeX Guide
       - href: alt-text.qmd
         text: ALT Text
+      - href: handwritten.qmd
+        text: Handwritten notes
       # - href: about.qmd
       #   text: Contact
 

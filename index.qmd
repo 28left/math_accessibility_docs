@@ -21,6 +21,13 @@ Before delving into details on LaTeX, here are **four core principles that alway
 - [Some examples](general.qmd#examples) of good and bad LaTeX usage.  
 - On the [Workflows page](workflows.qmd), you can find links to instructions specific to the kind of document you want to produce.
 
+## Content other than LaTeX
+
+- [**Handwritten notes**](handwritten.qmd)
+- **Video captioning, Powerpoint or Keynote slides, etc.**   
+You can find many accessibility tips and workflows at these sites:
+  - [Grove Center Accessibility minutes](https://pennstateoffice365.sharepoint.com/:w:/s/TheScienceEducationCollaboratory/IQBjPhoC5ugMTLoxQibzWnxzAcQP_lYtl3jsYqMnkwjHSxE?e=O9tibw)
+  - [Accessibility@PSU](https://accessibility.psu.edu/) 
 
 ## Getting help
 

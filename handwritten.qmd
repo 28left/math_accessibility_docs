@@ -1,0 +1,58 @@
+---
+title: "Handwritten notes"
+---
+
+## Penn State IT Guidelines 
+
+::: {.callout-important}
+## Ephemeral content (e.g., handwritten notes, lecture recordings, etc.):   
+
+- **Short-Term Use (Single Semester)** – for content that is created for one semester only and will not be reused: 
+
+  - Handwritten Notes: Handwritten notes created using notetaking software or a document camera, converted to a PDF, and shared with students do not need to be made accessible **unless you receive a formal accommodation request**.   
+
+  - Lecture Recordings: If you record lectures and make them available to students for that semester only, machine-generated captions from Kaltura (or Zoom) are sufficient **unless you receive a formal accommodation request**.   
+    
+- **Long-Term Use (Multiple Semesters)** – if you plan to reuse content in future sections of the course, these content items need to be made accessible:    
+
+  - Handwritten notes: These documents need to be transcribed. 
+
+  - Lecture Recordings: Captions must be edited to reach 99% accuracy.
+:::
+
+## Additional Remarks
+
+The status of handwritten materials is nuanced. It takes time and effort to typeset handwritten notes, and additional effort to convert the typeset notes into a fully accessible format.
+
+Handwritten materials that will be reused in a course have to be converted to an accessible format.
+"Reused" obviously leaves room for interpretation: Does the material have to be *exactly* the same every semester to fall into this category? Use good judgement here.
+
+::: {.callout-tip}
+If you find yourself posting class notes semester after semester that are *essentially* the same (within $\varepsilon$), it is time to start converting them to a digitally accessible format. 
+:::
+
+
+Modern publishing systems create great-looking content while at the same time enhancing accessibility for many - **your handwriting may not be as readable as you think**. 
+
+Here are a couple of examples of notes that have been converted:
+
+- [Math 110](https://28left.github.io/110jupyter/intro.html) (using Jupyterbook, [link to source code](https://github.com/28left/110jupyter))
+- [Math 557](https://28left.github.io/mathlogic/) (using Quarto, [link to source code](https://github.com/28left/mathlogic))
+
+
+
+### Scaffolded notes 
+
+Many instructors use *scaffolded notes*, where part of the content is pre-formatted while the remaining part is filled in during class sessions (either by students or instructors, often handwritten on a tablet). The same basic rules apply here: 
+
+- If you use the same scaffolded notes every semester and post the (unfilled) notes online, they have to be made accessible. 
+- Filled notes probably will differ from semester to semester and would likely fall under the "ephemeral" rule stated above.
+- However, if you provide a "canocical" filled-in version (e.g., solutions to in-class exercises), and this does not change from semester to semester, the filled-in version has to be made accessible, too.
+
+### AI use
+
+We experimented with AI tools for converting handwritten material, with mixed success. In the medium term, it may become easier to convert handwritten notes using such tools. As this becomes more practical, our responsibility to convert these materials will increase, since the regulations require us to make use of available tools. At present, converting handwriting remains at the edge of current AI capabilities, and success depends on both the complexity of the material and the quality of the source. 
+
+You are encourged to experiment with this yourself. The launch of Penn State's **AI Studio** should alleviate concerns regarding data privacy in this regard. Even if not completely accurate, the converted material may serve as a starting point for a set of lecture notes that can be used in future semesters.
+
+
