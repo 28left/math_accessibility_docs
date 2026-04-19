@@ -2,42 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://28left.github.io/math_accessibility_docs/tagged-pdf.html</loc>
-    <lastmod>2026-03-23T22:51:24.262Z</lastmod>
-  </url>
-  <url>
-    <loc>https://28left.github.io/math_accessibility_docs/general.html</loc>
-    <lastmod>2026-03-20T14:57:26.255Z</lastmod>
-  </url>
-  <url>
-    <loc>https://28left.github.io/math_accessibility_docs/index.html</loc>
-    <lastmod>2026-04-06T13:25:22.939Z</lastmod>
-  </url>
-  <url>
-    <loc>https://28left.github.io/math_accessibility_docs/slides.html</loc>
-    <lastmod>2026-04-14T18:58:03.116Z</lastmod>
-  </url>
-  <url>
-    <loc>https://28left.github.io/math_accessibility_docs/latexml.html</loc>
-    <lastmod>2026-03-18T03:24:22.190Z</lastmod>
-  </url>
-  <url>
-    <loc>https://28left.github.io/math_accessibility_docs/latexcanvas.html</loc>
-    <lastmod>2026-03-18T01:07:59.443Z</lastmod>
-  </url>
-  <url>
-    <loc>https://28left.github.io/math_accessibility_docs/workflows.html</loc>
-    <lastmod>2026-04-06T13:26:40.061Z</lastmod>
-  </url>
-  <url>
-    <loc>https://28left.github.io/math_accessibility_docs/alt-text.html</loc>
-    <lastmod>2026-03-17T01:09:15.180Z</lastmod>
-  </url>
-  <url>
-    <loc>https://28left.github.io/math_accessibility_docs/lualatex-guide.html</loc>
-    <lastmod>2026-04-14T18:52:15.867Z</lastmod>
+    <lastmod>2026-04-18T03:21:38.781Z</lastmod>
   </url>
   <url>
     <loc>https://28left.github.io/math_accessibility_docs/about.html</loc>
-    <lastmod>2026-03-17T01:17:31.184Z</lastmod>
+    <lastmod>2026-04-18T03:21:38.778Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/lualatex-guide.html</loc>
+    <lastmod>2026-04-18T03:21:38.780Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/alt-text.html</loc>
+    <lastmod>2026-04-18T03:21:38.779Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/workflows.html</loc>
+    <lastmod>2026-04-18T03:21:38.781Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/latexcanvas.html</loc>
+    <lastmod>2026-04-18T03:21:38.780Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/latexml.html</loc>
+    <lastmod>2026-04-18T03:21:38.780Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/slides.html</loc>
+    <lastmod>2026-04-18T03:21:38.780Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/index.html</loc>
+    <lastmod>2026-04-19T17:31:53.634Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/general.html</loc>
+    <lastmod>2026-04-18T03:21:38.780Z</lastmod>
+  </url>
+  <url>
+    <loc>https://28left.github.io/math_accessibility_docs/handwritten.html</loc>
+    <lastmod>2026-04-19T17:14:59.210Z</lastmod>
   </url>
 </urlset>

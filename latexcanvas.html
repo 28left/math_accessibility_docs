@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>latexcanvas – Producing Accessible Documents with LaTeX</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7b1b06e26e1e2798ccde3208f86b5bbd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a2a938b4dd5711f7a799c87bd16ba44c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -119,7 +122,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -226,6 +229,12 @@ window.Quarto = {
  <span class="menu-text">ALT Text</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./handwritten.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Handwritten notes</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -258,8 +267,8 @@ window.Quarto = {
 <section id="entering-math-formulas" class="level2">
 <h2 class="anchored" data-anchor-id="entering-math-formulas">Entering math formulas</h2>
 <p>Use the delimiters <code>\( ... \)</code> to typeset in-line math and the delimiters <code>\[ ... \]</code> to typeset display math. For example, the syntax below</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>To solve the equation <span class="ss">\(x^2 - 3x - 4 = 0\)</span>, we can use the quadratic formula</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="ss">\[x = </span><span class="sc">\frac</span><span class="ss">{-b </span><span class="sc">\pm</span><span class="ss"> </span><span class="sc">\sqrt</span><span class="ss">{b^2 - 4ac}}{2a}.\]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>To solve the equation <span class="ss">\(x^2 - 3x - 4 = 0\)</span>, we can use the quadratic formula</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="ss">\[x = </span><span class="sc">\frac</span><span class="ss">{-b </span><span class="sc">\pm</span><span class="ss"> </span><span class="sc">\sqrt</span><span class="ss">{b^2 - 4ac}}{2a}.\]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>produces the following output in CANVAS after saving:</p>
 <blockquote class="blockquote">
 <p>To solve the equation <span class="math inline">\(x^2 - 3x - 4 = 0\)</span>, we can use the quadratic formula <span class="math display">\[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}.\]</span></p>
@@ -312,16 +321,16 @@ window.Quarto = {
 <li><p>As mentioned above, only the delimiters <code>\(...\)</code> will cause in-line math to render. The standard dollar sign delimiters <code>$...$</code> will not work, nor will <code>\begin{math}</code></p></li>
 <li><p>For display math, the double dollar signs <code>$$...$$</code> will sometimes render, but other times it may cause issues for the CANVAS compiler. The delimiters <code>\[...\]</code> are preferable. The environment <code>\begin{displaymath}</code> does not render.</p></li>
 <li><p>When working within an environment like <code>\begin{matrix}</code>, do not enter between your desired rows. For example, the matrix <span class="math display">\[\begin{matrix} 0 &amp; 1 \\ 1 &amp; 0 \end{matrix} \]</span> should be typeset as</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">matrix</span>} 0 &amp; 1 <span class="fu">\\</span> 1 &amp; 0 <span class="kw">\end</span>{<span class="ex">matrix</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">matrix</span>} 0 &amp; 1 <span class="fu">\\</span> 1 &amp; 0 <span class="kw">\end</span>{<span class="ex">matrix</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>as opposed to</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">matrix</span>} </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">matrix</span>} </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>0 &amp; 1 <span class="fu">\\</span> </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">matrix</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">matrix</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>For math environments in display mode, delimiters are optional. For example, both</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">matrix</span>} 0 &amp; 1 <span class="fu">\\</span> 1 &amp; 0 <span class="kw">\end</span>{<span class="ex">matrix</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">matrix</span>} 0 &amp; 1 <span class="fu">\\</span> 1 &amp; 0 <span class="kw">\end</span>{<span class="ex">matrix</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>and</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ss">\[ </span><span class="kw">\begin</span>{<span class="ex">matrix</span>}<span class="ss"> 0 &amp; 1 </span><span class="sc">\\</span><span class="ss"> 1 &amp; 0 </span><span class="kw">\end</span>{<span class="ex">matrix</span>}<span class="ss"> \]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ss">\[ </span><span class="kw">\begin</span>{<span class="ex">matrix</span>}<span class="ss"> 0 &amp; 1 </span><span class="sc">\\</span><span class="ss"> 1 &amp; 0 </span><span class="kw">\end</span>{<span class="ex">matrix</span>}<span class="ss"> \]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>will render.</p></li>
 <li><p>The environment <code>\begin{equation}</code> and related environments will still render, but CANVAS does not support the numbering or reference feature.</p></li>
 <li><p>In general, due to these formatting differences the best way to use the LaTeX CANVAS editor is to type directly into it, versus copying and pasting from another source. If you have a preexisting .tex file that you want to convert to an accessible format, please see our dedicated resources.</p></li>
@@ -395,13 +404,14 @@ window.Quarto = {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

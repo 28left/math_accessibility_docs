@@ -4,7 +4,7 @@
     "href": "tagged-pdf.html",
     "title": "Creating Tagged PDFs from LaTeX",
     "section": "",
-    "text": "Tagged PDFs contain structural and semantic information that makes them accessible to screen readers and other assistive technologies. This page explains the changes needed to compile an existing LaTeX file as a tagged PDF using lualatex.\n\n\n\n\n\n\nTagged PDF support requires compiling with lualatex (not pdflatex or xelatex).\n\n\n\n\n\nAt the very top of the file — before \\documentclass — add the following block:\n\\DocumentMetadata{\n    tagging=on,\n    pdfstandard=ua-2,\n    lang=en,\n    tagging-setup = {math/setup=mathml-SE}\n}\n\\tagpdfsetup{math/alt/use} % This line is only to force Canvas Ally compliance. \n% It does NOT improve accessibility.\nThis enables tagging, sets the PDF/UA-2 accessibility standard, declares the document language, and configures math tagging via MathML.\n\n\n\nImmediately after the \\documentclass{...} line, add:\n\\usepackage{unicode-math}\nThis package is required for proper math tagging with lualatex.\n\n\n\nJust before \\begin{document}, add:\n\\usepackage{hyperref}\n\\hypersetup{pdftitle={Your Title Here}}\nFor the title, use whichever is present in the document:\n\nThe argument of \\title{...}, or\nThe argument of \\header{...}, or\nA descriptive title inferred from the document content.\n\n\n\n\nIf the document contains tables, each table needs its header rows or columns identified. Add a \\tagpdfsetup call immediately before the relevant tabular environment:\n\n\n\n\n\n\nHeader row (most common)\n\n\n\n\\tagpdfsetup{table/header-rows={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\n\n\n\n\n\n\nHeader column\n\n\n\n\\tagpdfsetup{table/header-columns={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\nSpecify the relevant row or column numbers as a comma-separated list (e.g., {1,2} if the first two rows are headers).\n\n\n\nEvery \\includegraphics call must include an alt key with a descriptive text for screen reader users:\n\n\n\n\n\n\nWithout alt text (inaccessible)\n\n\n\n\\includegraphics[width=\\textwidth]{figure1}\n\n\n\n\n\n\n\n\nWith alt text (accessible)\n\n\n\n\\includegraphics[width=\\textwidth, \nalt={A graph showing the convergence of the sequence to zero as n increases.}]\n{figure1}\n\n\nWrite a few descriptive sentences that convey the meaning or content of the image, not just its appearance.\nThe details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.\n\n\n\nIf the document uses \\textcolor or similar commands, verify that the color combinations meet minimum contrast requirements (contrast ratio of at least 4.5:1 for normal text).\n\n\n\n\n\n\nPoor contrast\n\n\n\n\\textcolor{red}{Important note}\n\\textcolor{green}{Correct answer}\n\n\n\n\n\n\n\n\nSufficient contrast\n\n\n\n\\textcolor{blue}{Important note}\n\\textcolor{teal}{Correct answer}\n\n\nUse a color contrast checker to verify your color choices.\n\n\n\n\n\n\n\n\n\n\nStep\nWhat to add/change\n\n\n\n\n1\n\\DocumentMetadata{...} and \\tagpdfsetup{math/alt/use} at top of file\n\n\n2\n\\usepackage{unicode-math} after \\documentclass\n\n\n3\n\\usepackage{hyperref} + \\hypersetup{pdftitle={...}} before \\begin{document}\n\n\n4\n\\tagpdfsetup{table/header-rows={...}} before each table\n\n\n5\nalt={...} in every \\includegraphics\n\n\n6\nVerify color contrast ratios\n\n\n\n\n\n\nHere is a minimal template you can use as a starting point for your documents.\n\\DocumentMetadata{\ntagging=on,\npdfstandard=ua-2,\nlang=en,\ntagging-setup = {math/setup=mathml-SE}\n}\n\\tagpdfsetup{math/alt/use}\n\n\\documentclass{article}\n\\usepackage{unicode-math}\n\n\\usepackage{hyperref}\n\\hypersetup{\npdftitle={Test},\npdfauthor={Test Test},\npdfsubject={Testsubject}\n}\n\n\\begin{document}\n\n\\section{Basic mathematical expressions}\n\nIf $x$ is real, then $x^{2} \\geq 0$.\n\nA matrix equation.\n\\[\n\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}\n\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\n=\n\\begin{pmatrix}c&d\\\\a&b\\end{pmatrix}\n\\]\n\n\\end{document}\nAs you add more packages, be aware of incompatibiltities.\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nThe LaTeX Tagging Project is in active development. Many popular packages are not (yet) compatible. LuaLaTeX will often not compile at all.\nYou can see the current status of packages here: Taging Status of LaTeX Packages and Classes\n\n\nIf you run into incompatibilities, try to find a workaround using packages that are supported.\nFor example (as of March 16, 2026), both enumerate and enumitem are not fully compatible. You can use enumext instead, but the syntax of your enumeration environments will need to be slightly adjusted.\n\n\n\n\nLaTeX Tagging Project — official documentation and ongoing development",
+    "text": "Tagged PDFs contain structural and semantic information that makes them accessible to screen readers and other assistive technologies. This page explains the changes needed to compile an existing LaTeX file as a tagged PDF using lualatex.\n\n\n\n\n\n\nTagged PDF support requires compiling with lualatex (not pdflatex or xelatex).\n\n\n\n\n\nAt the very top of the file — before \\documentclass — add the following block:\n\\DocumentMetadata{\n    tagging=on,\n    pdfstandard=ua-2,\n    lang=en,\n    tagging-setup = {math/setup=mathml-SE}\n}\n\\tagpdfsetup{math/alt/use} % This line is only to force Canvas Ally compliance. \n% It does NOT improve accessibility.\nThis enables tagging, sets the PDF/UA-2 accessibility standard, declares the document language, and configures math tagging via MathML.\n\n\n\nImmediately after the \\documentclass{...} line, add:\n\\usepackage{unicode-math}\nThis package is required for proper math tagging with lualatex.\n\n\n\nJust before \\begin{document}, add:\n\\usepackage{hyperref}\n\\hypersetup{pdftitle={Your Title Here}}\nFor the title, use whichever is present in the document:\n\nThe argument of \\title{...}, or\nThe argument of \\header{...}, or\nA descriptive title inferred from the document content.\n\n\n\n\nIf the document contains tables, each table needs its header rows or columns identified. Add a \\tagpdfsetup call immediately before the relevant tabular environment:\n\n\n\n\n\n\nTipHeader row (most common)\n\n\n\n\\tagpdfsetup{table/header-rows={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\n\n\n\n\n\n\nTipHeader column\n\n\n\n\\tagpdfsetup{table/header-columns={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\nSpecify the relevant row or column numbers as a comma-separated list (e.g., {1,2} if the first two rows are headers).\n\n\n\nEvery \\includegraphics call must include an alt key with a descriptive text for screen reader users:\n\n\n\n\n\n\nImportantWithout alt text (inaccessible)\n\n\n\n\\includegraphics[width=\\textwidth]{figure1}\n\n\n\n\n\n\n\n\nTipWith alt text (accessible)\n\n\n\n\\includegraphics[width=\\textwidth, \nalt={A graph showing the convergence of the sequence to zero as n increases.}]\n{figure1}\n\n\nWrite a few descriptive sentences that convey the meaning or content of the image, not just its appearance.\nThe details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.\n\n\n\nIf the document uses \\textcolor or similar commands, verify that the color combinations meet minimum contrast requirements (contrast ratio of at least 4.5:1 for normal text).\n\n\n\n\n\n\nImportantPoor contrast\n\n\n\n\\textcolor{red}{Important note}\n\\textcolor{green}{Correct answer}\n\n\n\n\n\n\n\n\nTipSufficient contrast\n\n\n\n\\textcolor{blue}{Important note}\n\\textcolor{teal}{Correct answer}\n\n\nUse a color contrast checker to verify your color choices.\n\n\n\n\n\n\n\n\n\n\nStep\nWhat to add/change\n\n\n\n\n1\n\\DocumentMetadata{...} and \\tagpdfsetup{math/alt/use} at top of file\n\n\n2\n\\usepackage{unicode-math} after \\documentclass\n\n\n3\n\\usepackage{hyperref} + \\hypersetup{pdftitle={...}} before \\begin{document}\n\n\n4\n\\tagpdfsetup{table/header-rows={...}} before each table\n\n\n5\nalt={...} in every \\includegraphics\n\n\n6\nVerify color contrast ratios\n\n\n\n\n\n\nHere is a minimal template you can use as a starting point for your documents.\n\\DocumentMetadata{\ntagging=on,\npdfstandard=ua-2,\nlang=en,\ntagging-setup = {math/setup=mathml-SE}\n}\n\\tagpdfsetup{math/alt/use}\n\n\\documentclass{article}\n\\usepackage{unicode-math}\n\n\\usepackage{hyperref}\n\\hypersetup{\npdftitle={Test},\npdfauthor={Test Test},\npdfsubject={Testsubject}\n}\n\n\\begin{document}\n\n\\section{Basic mathematical expressions}\n\nIf $x$ is real, then $x^{2} \\geq 0$.\n\nA matrix equation.\n\\[\n\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}\n\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\n=\n\\begin{pmatrix}c&d\\\\a&b\\end{pmatrix}\n\\]\n\n\\end{document}\nAs you add more packages, be aware of incompatibiltities.\n\n\n\n\n\n\n\n\n\nImportantWarning\n\n\n\nThe LaTeX Tagging Project is in active development. Many popular packages are not (yet) compatible. LuaLaTeX will often not compile at all.\nYou can see the current status of packages here: Taging Status of LaTeX Packages and Classes\n\n\nIf you run into incompatibilities, try to find a workaround using packages that are supported.\nFor example (as of March 16, 2026), both enumerate and enumitem are not fully compatible. You can use enumext instead, but the syntax of your enumeration environments will need to be slightly adjusted.\n\n\n\n\nLaTeX Tagging Project — official documentation and ongoing development",
     "crumbs": [
       "Tagged PDFs"
     ]
@@ -44,7 +44,7 @@
     "href": "tagged-pdf.html#tag-tables",
     "title": "Creating Tagged PDFs from LaTeX",
     "section": "",
-    "text": "If the document contains tables, each table needs its header rows or columns identified. Add a \\tagpdfsetup call immediately before the relevant tabular environment:\n\n\n\n\n\n\nHeader row (most common)\n\n\n\n\\tagpdfsetup{table/header-rows={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\n\n\n\n\n\n\nHeader column\n\n\n\n\\tagpdfsetup{table/header-columns={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\nSpecify the relevant row or column numbers as a comma-separated list (e.g., {1,2} if the first two rows are headers).",
+    "text": "If the document contains tables, each table needs its header rows or columns identified. Add a \\tagpdfsetup call immediately before the relevant tabular environment:\n\n\n\n\n\n\nTipHeader row (most common)\n\n\n\n\\tagpdfsetup{table/header-rows={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\n\n\n\n\n\n\nTipHeader column\n\n\n\n\\tagpdfsetup{table/header-columns={1}}\n\\begin{tabular}{...}\n  ...\n\\end{tabular}\n\n\nSpecify the relevant row or column numbers as a comma-separated list (e.g., {1,2} if the first two rows are headers).",
     "crumbs": [
       "Tagged PDFs"
     ]
@@ -54,7 +54,7 @@
     "href": "tagged-pdf.html#add-alt-text-to-images",
     "title": "Creating Tagged PDFs from LaTeX",
     "section": "",
-    "text": "Every \\includegraphics call must include an alt key with a descriptive text for screen reader users:\n\n\n\n\n\n\nWithout alt text (inaccessible)\n\n\n\n\\includegraphics[width=\\textwidth]{figure1}\n\n\n\n\n\n\n\n\nWith alt text (accessible)\n\n\n\n\\includegraphics[width=\\textwidth, \nalt={A graph showing the convergence of the sequence to zero as n increases.}]\n{figure1}\n\n\nWrite a few descriptive sentences that convey the meaning or content of the image, not just its appearance.\nThe details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.",
+    "text": "Every \\includegraphics call must include an alt key with a descriptive text for screen reader users:\n\n\n\n\n\n\nImportantWithout alt text (inaccessible)\n\n\n\n\\includegraphics[width=\\textwidth]{figure1}\n\n\n\n\n\n\n\n\nTipWith alt text (accessible)\n\n\n\n\\includegraphics[width=\\textwidth, \nalt={A graph showing the convergence of the sequence to zero as n increases.}]\n{figure1}\n\n\nWrite a few descriptive sentences that convey the meaning or content of the image, not just its appearance.\nThe details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.",
     "crumbs": [
       "Tagged PDFs"
     ]
@@ -64,7 +64,7 @@
     "href": "tagged-pdf.html#check-color-contrast",
     "title": "Creating Tagged PDFs from LaTeX",
     "section": "",
-    "text": "If the document uses \\textcolor or similar commands, verify that the color combinations meet minimum contrast requirements (contrast ratio of at least 4.5:1 for normal text).\n\n\n\n\n\n\nPoor contrast\n\n\n\n\\textcolor{red}{Important note}\n\\textcolor{green}{Correct answer}\n\n\n\n\n\n\n\n\nSufficient contrast\n\n\n\n\\textcolor{blue}{Important note}\n\\textcolor{teal}{Correct answer}\n\n\nUse a color contrast checker to verify your color choices.",
+    "text": "If the document uses \\textcolor or similar commands, verify that the color combinations meet minimum contrast requirements (contrast ratio of at least 4.5:1 for normal text).\n\n\n\n\n\n\nImportantPoor contrast\n\n\n\n\\textcolor{red}{Important note}\n\\textcolor{green}{Correct answer}\n\n\n\n\n\n\n\n\nTipSufficient contrast\n\n\n\n\\textcolor{blue}{Important note}\n\\textcolor{teal}{Correct answer}\n\n\nUse a color contrast checker to verify your color choices.",
     "crumbs": [
       "Tagged PDFs"
     ]
@@ -94,7 +94,7 @@
     "href": "tagged-pdf.html#incompatible-packages",
     "title": "Creating Tagged PDFs from LaTeX",
     "section": "",
-    "text": "Warning\n\n\n\nThe LaTeX Tagging Project is in active development. Many popular packages are not (yet) compatible. LuaLaTeX will often not compile at all.\nYou can see the current status of packages here: Taging Status of LaTeX Packages and Classes\n\n\nIf you run into incompatibilities, try to find a workaround using packages that are supported.\nFor example (as of March 16, 2026), both enumerate and enumitem are not fully compatible. You can use enumext instead, but the syntax of your enumeration environments will need to be slightly adjusted.",
+    "text": "ImportantWarning\n\n\n\nThe LaTeX Tagging Project is in active development. Many popular packages are not (yet) compatible. LuaLaTeX will often not compile at all.\nYou can see the current status of packages here: Taging Status of LaTeX Packages and Classes\n\n\nIf you run into incompatibilities, try to find a workaround using packages that are supported.\nFor example (as of March 16, 2026), both enumerate and enumitem are not fully compatible. You can use enumext instead, but the syntax of your enumeration environments will need to be slightly adjusted.",
     "crumbs": [
       "Tagged PDFs"
     ]
@@ -110,163 +110,133 @@
     ]
   },
   {
-    "objectID": "general.html",
-    "href": "general.html",
-    "title": "General Principles for Accessibility",
+    "objectID": "lualatex-guide.html",
+    "href": "lualatex-guide.html",
+    "title": "Using LuaLaTeX",
     "section": "",
-    "text": "Whenever possible, use structural elements to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables. If available, start from a template.\nDon’t use color as the only way to communicate information. If you are using colors, make sure to have sufficient contrast.\nPut alt text (text descriptions) on images and graphs. (More info)\nMake sure all videos you are using have accurate captions and a transcript.\n\n\n\n\n\n\n\n\n\n\n\nBad (not using latex structure)\n\n\n\n\\texbf{1. My Section}\n\n\n\n\n\n\n\n\nGood (using latex structure)\n\n\n\n\\section{My Section}\n\n\\subsection*{My unnumbered Subsection}\n\n\nor\n\n\n\n\n\n\nBad (not using predefined latex structure)\n\n\n\n$\\cdot$ Item 1\n$\\cdot$ Item 2\n\n\n\n\n\n\n\n\nGood (using predefined latex structure ‘itemize’)\n\n\n\n\\begin{itemize}\n\\item Item 1\n\\item Item 2\n\\end{itemize}\n\n\n\n\n\n\n\n\n\n\n\nBad (not enough contrast)\n\n\n\n\\textcolor{red}{...}\n\\textcolor{green}{...}\n\n\n\n\n\n\n\n\nGood (sufficient contrast)\n\n\n\n\\textcolor{blue}{...}\n\\textcolor{teal}{...}\n\n\nGenerally, the following LaTeX colors should have sufficient contrast over white background:\n`blue`, `purple`, `teal`, `violet`, `black`, `darkgray`",
+    "text": "LuaLaTeX is a modern TeX engine that extends pdfLaTeX with the Lua scripting language. It is the recommended engine for most contemporary LaTeX projects because it supports:\n\nUnicode natively — no need for inputenc or fontenc\nOpenType and TrueType fonts via the fontspec package\nLua scripting for dynamic document generation\nFull backwards compatibility with most pdfLaTeX documents\nBetter support for complex scripts (Arabic, CJK, etc.)\n\nLuaLaTeX is bundled with all major TeX distributions (TeX Live, MiKTeX) so chances are that you already have LuaLaTeX on your computer.\n\n\n\n\n\n\nFor accessible tagging to work, you need to use a current version of LuaLaTeX. Please refer to the documentation of the TeX-distribution or IDE you are using for instructions on how to update LuaLaTeX to the latest release.",
     "crumbs": [
-      "General Principles"
+      "LuaLaTeX Guide"
     ]
   },
   {
-    "objectID": "general.html#examples",
-    "href": "general.html#examples",
-    "title": "General Principles for Accessibility",
+    "objectID": "lualatex-guide.html#what-is-lualatex",
+    "href": "lualatex-guide.html#what-is-lualatex",
+    "title": "Using LuaLaTeX",
     "section": "",
-    "text": "Bad (not using latex structure)\n\n\n\n\\texbf{1. My Section}\n\n\n\n\n\n\n\n\nGood (using latex structure)\n\n\n\n\\section{My Section}\n\n\\subsection*{My unnumbered Subsection}\n\n\nor\n\n\n\n\n\n\nBad (not using predefined latex structure)\n\n\n\n$\\cdot$ Item 1\n$\\cdot$ Item 2\n\n\n\n\n\n\n\n\nGood (using predefined latex structure ‘itemize’)\n\n\n\n\\begin{itemize}\n\\item Item 1\n\\item Item 2\n\\end{itemize}\n\n\n\n\n\n\n\n\n\n\n\nBad (not enough contrast)\n\n\n\n\\textcolor{red}{...}\n\\textcolor{green}{...}\n\n\n\n\n\n\n\n\nGood (sufficient contrast)\n\n\n\n\\textcolor{blue}{...}\n\\textcolor{teal}{...}\n\n\nGenerally, the following LaTeX colors should have sufficient contrast over white background:\n`blue`, `purple`, `teal`, `violet`, `black`, `darkgray`",
+    "text": "LuaLaTeX is a modern TeX engine that extends pdfLaTeX with the Lua scripting language. It is the recommended engine for most contemporary LaTeX projects because it supports:\n\nUnicode natively — no need for inputenc or fontenc\nOpenType and TrueType fonts via the fontspec package\nLua scripting for dynamic document generation\nFull backwards compatibility with most pdfLaTeX documents\nBetter support for complex scripts (Arabic, CJK, etc.)\n\nLuaLaTeX is bundled with all major TeX distributions (TeX Live, MiKTeX) so chances are that you already have LuaLaTeX on your computer.\n\n\n\n\n\n\nFor accessible tagging to work, you need to use a current version of LuaLaTeX. Please refer to the documentation of the TeX-distribution or IDE you are using for instructions on how to update LuaLaTeX to the latest release.",
     "crumbs": [
-      "General Principles"
+      "LuaLaTeX Guide"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Producing Accessible Documents with LaTeX",
+    "objectID": "lualatex-guide.html#set-lualatex-as-your-engine-in-popular-ides",
+    "href": "lualatex-guide.html#set-lualatex-as-your-engine-in-popular-ides",
+    "title": "Using LuaLaTeX",
+    "section": "Set LuaLaTeX as Your Engine in Popular IDEs",
+    "text": "Set LuaLaTeX as Your Engine in Popular IDEs\n\nTeXShop (macOS)\nTeXShop is the classic macOS LaTeX editor included with MacTeX.\nPer-document (recommended):\nAdd this magic comment at the top of your .tex file:\n% !TEX program = lualatex\nAs the default engine:\n\nOpen TeXShop → Preferences\nGo to the Engine tab\nUnder Default Command, select LuaLaTeX from the dropdown\nClick OK\n\n\n\nTeXworks (Windows, macOS, Linux)\nTeXworks is a lightweight cross-platform editor bundled with both TeX Live and MiKTeX.\nPer-document:\n% !TEX program = lualatex\nAs the default engine:\n\nGo to Edit → Preferences → Typesetting\nUnder Default program, select LuaLaTeX\nClick OK\n\n\n\nTeXstudio (Windows, macOS, Linux)\nTeXstudio is one of the most popular full-featured LaTeX editors.\nPer-document:\n% !TeX program = lualatex\nAs the default compiler:\n\nOpen Options → Configure TeXstudio\nGo to Build\nUnder Default Compiler, select LuaLaTeX from the dropdown\nClick OK\n\n\n\n\n\n\n\nTeXstudio also supports setting the bibliography tool and other build options in the same Build settings panel.\n\n\n\n\n\nOverleaf (Web-based)\nOverleaf is the leading cloud-based LaTeX editor — no installation required.\nPer-project:\n\nOpen your project\nClick the Menu button (☰) in the top-left corner\nUnder Settings → Compiler, select LuaLaTeX\nClick anywhere to close — all future compilations will use LuaLaTeX\n\nAlternatively, add the magic comment to your main .tex file:\n% !TEX program = lualatex\n\n\nVS Code with LaTeX Workshop (Windows, macOS, Linux)\nLaTeX Workshop is the most popular LaTeX extension for VS Code.\nPer-document:\n% !TEX program = lualatex\nAs the default recipe (settings.json):\nOpen Settings → Open Settings (JSON) (Ctrl+Shift+P → *“Open User Settings JSON”`) and add:\n\n\nsettings.json\n\n{\n  \"latex-workshop.latex.recipes\": [\n    {\n      \"name\": \"LuaLaTeX\",\n      \"tools\": [\"lualatex\"]\n    }\n  ],\n  \"latex-workshop.latex.tools\": [\n    {\n      \"name\": \"lualatex\",\n      \"command\": \"lualatex\",\n      \"args\": [\n        \"--shell-escape\",\n        \"--interaction=nonstopmode\",\n        \"--synctex=1\",\n        \"%DOC%\"\n      ]\n    }\n  ]\n}\n\n\n\nEmacs with AUCTeX (Windows, macOS, Linux)\nPer-document (file-local variables):\nAdd this at the bottom of your .tex file:\n%%% Local Variables:\n%%% mode: latex\n%%% TeX-engine: luatex\n%%% End:\nGlobally in your init.el:\n\n\ninit.el\n\n(setq-default TeX-engine 'luatex)\n\nDuring a session:\nUse M-x TeX-engine-set and select luatex.\n\n\nVim / Neovim with VimTeX (Windows, macOS, Linux)\nPer-document (modeline at top of file):\n% vim: set ft=tex spell spelllang=en_us:\nGlobal setting in init.vim / init.lua:\n\n\ninit.vim\n\nlet g:vimtex_compiler_latexmk_engines = {'_': '-lualatex'}\n\n\n\ninit.lua\n\nvim.g.vimtex_compiler_latexmk_engines = { _ = '-lualatex' }",
+    "crumbs": [
+      "LuaLaTeX Guide"
+    ]
+  },
+  {
+    "objectID": "lualatex-guide.html#an-example-lualatex-document",
+    "href": "lualatex-guide.html#an-example-lualatex-document",
+    "title": "Using LuaLaTeX",
+    "section": "An Example LuaLaTeX Document",
+    "text": "An Example LuaLaTeX Document\nHere is a minimal LuaLaTeX document that you can use for testing your installation:\n\n\nhello-lualatex.tex\n\n\\documentclass{article}\n\n% LuaLaTeX-specific packages\n\\usepackage{fontspec}       % OpenType font support\n\\usepackage{luacode}        % Lua scripting in LaTeX\n\n% Set a system font (change to one available on your system)\n\\setmainfont{Latin Modern Roman}\n\n\\title{My First LuaLaTeX Document}\n\\author{Your Name}\n\\date{\\today}\n\n\\begin{document}\n\n\\maketitle\n\n\\section{Hello, LuaLaTeX!}\n\nThis document is compiled with LuaLaTeX.\nIt supports Unicode natively: café, naïve, Ångström, 日本語.\n\n\\section{Lua Scripting}\n\nThe answer to life is\n\\directlua{tex.sprint(6 * 7)}.\n\n\\end{document}",
+    "crumbs": [
+      "LuaLaTeX Guide"
+    ]
+  },
+  {
+    "objectID": "lualatex-guide.html#common-issues-and-fixes",
+    "href": "lualatex-guide.html#common-issues-and-fixes",
+    "title": "Using LuaLaTeX",
+    "section": "Common Issues and Fixes",
+    "text": "Common Issues and Fixes\n\n\n\n\n\n\n\n\nProblem\nCause\nFix\n\n\n\n\nlualatex: command not found\nTeX not on PATH\nAdd TeX bin dir to your PATH\n\n\nFont not found\nSystem font not installed\nInstall font or use a TeX font\n\n\n! Package fontspec Error\nUsing pdfLaTeX accidentally\nEnsure LuaLaTeX is the selected engine\n\n\nSlow compilation\nLuaLaTeX is inherently slower\nUse --draftmode for intermediate builds\n\n\nUnicode characters not rendering\nMissing font coverage\nUse a broader font like Noto or DejaVu",
+    "crumbs": [
+      "LuaLaTeX Guide"
+    ]
+  },
+  {
+    "objectID": "lualatex-guide.html#additional-resources",
+    "href": "lualatex-guide.html#additional-resources",
+    "title": "Using LuaLaTeX",
+    "section": "Additional Resources",
+    "text": "Additional Resources\n\nLuaLaTeX documentation (luatex.org)\nfontspec package documentation (CTAN)\nTeX Live Guide\nLaTeX Wikibook — LuaLaTeX chapter\nOverleaf LuaLaTeX documentation",
+    "crumbs": [
+      "LuaLaTeX Guide"
+    ]
+  },
+  {
+    "objectID": "alt-text.html",
+    "href": "alt-text.html",
+    "title": "ALT Text",
     "section": "",
-    "text": "This Website aims to give brief but self-contained instructions on how to use LaTeX to produce documents with accessibility features.\nBefore delving into details on LaTeX, here are four core principles that always apply (LaTeX or not):",
+    "text": "Every image needs to have an ALT text description. This needs to be more than just a caption like “Graph of the function \\(f(x)\\)”, but rather a few descriptive sentences that convey the meaning or content of the image, not just its appearance.\nThe details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.\n\n\n\n\n\n\nTipExample\n\n\n\n\nSee this page.\nHere, the ALT text is given in a separate structural element (the “Long Text Description” dropdown), but there are other ways to integrate these in your document - for example, when using \\includegraphics\n\n\n\n\nIdeally, you write a long description for each of your images yourself. This gives you the best control over accuracy and what information you would like to convey. But if you have a large number of images, this may not be practicable in the short run.\nAI bots have gotten much better at producing image descriptions recently. You can upload your image in any format (pdf, png, jpg, etc.) and prompt it to produce a text descrition:\n\"Generate a long description of the image for accessibility.\"\nIn many cases, this will even work if your image is generated via code, for example using tkiz. In this case, paste the tikz code instead of the graphics file.\n\n\n\n\n\n\nImportantImportant\n\n\n\nCheck AI-generated text for accuracy.",
     "crumbs": [
-      "Home"
+      "ALT Text"
     ]
   },
   {
-    "objectID": "index.html#general-principles-for-accessibility",
-    "href": "index.html#general-principles-for-accessibility",
-    "title": "Producing Accessible Documents with LaTeX",
-    "section": "General Principles for Accessibility",
-    "text": "General Principles for Accessibility\n\nWhenever possible, use structural elements to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables. If available, start from a template.\nDon’t use color as the only way to communicate information. If you are using colors, make sure to have sufficient contrast.\nPut alt text (text descriptions) on images and graphs. (More info)\nMake sure all videos you are using have accurate captions and a transcript.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#next-steps",
-    "href": "index.html#next-steps",
-    "title": "Producing Accessible Documents with LaTeX",
-    "section": "Next steps",
-    "text": "Next steps\n\nSome examples of good and bad LaTeX usage.\n\nOn the Workflows page, you can find links to instructions specific to the kind of document you want to produce.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#getting-help",
-    "href": "index.html#getting-help",
-    "title": "Producing Accessible Documents with LaTeX",
-    "section": "Getting help",
-    "text": "Getting help\nContact the Math Accessibility Team.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "slides.html",
-    "href": "slides.html",
-    "title": "Slides",
+    "objectID": "alt-text.html#producing-alt-text",
+    "href": "alt-text.html#producing-alt-text",
+    "title": "ALT Text",
     "section": "",
-    "text": "Beamer is the de-facto standard for LaTeX presentations, but it has a fundamental accessibility problem: it produces PDFs that are not tagged. An untagged PDF cannot be navigated by screen readers, fails automated accessibility checks, and cannot reflow for low-vision users.\nltx-talk is a modern presentation document class built on the LaTeX PDF tagging project. It produces properly tagged, accessible PDFs while keeping a syntax that Beamer users will find familiar. It requires LuaLaTeX.\n\n\n\n\n\n\nFull documentation: https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/ltx-talk/ltx-talk.pdf\nFor a broader discussion of accessible LaTeX slides, see David Eppstein’s post Making Accessible LaTeX talk slides.",
+    "text": "Ideally, you write a long description for each of your images yourself. This gives you the best control over accuracy and what information you would like to convey. But if you have a large number of images, this may not be practicable in the short run.\nAI bots have gotten much better at producing image descriptions recently. You can upload your image in any format (pdf, png, jpg, etc.) and prompt it to produce a text descrition:\n\"Generate a long description of the image for accessibility.\"\nIn many cases, this will even work if your image is generated via code, for example using tkiz. In this case, paste the tikz code instead of the graphics file.\n\n\n\n\n\n\nImportantImportant\n\n\n\nCheck AI-generated text for accuracy.",
     "crumbs": [
-      "Slides"
+      "ALT Text"
     ]
   },
   {
-    "objectID": "slides.html#from-beamer-to-ltx-talk",
-    "href": "slides.html#from-beamer-to-ltx-talk",
-    "title": "Slides",
+    "objectID": "workflows.html",
+    "href": "workflows.html",
+    "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "Beamer is the de-facto standard for LaTeX presentations, but it has a fundamental accessibility problem: it produces PDFs that are not tagged. An untagged PDF cannot be navigated by screen readers, fails automated accessibility checks, and cannot reflow for low-vision users.\nltx-talk is a modern presentation document class built on the LaTeX PDF tagging project. It produces properly tagged, accessible PDFs while keeping a syntax that Beamer users will find familiar. It requires LuaLaTeX.\n\n\n\n\n\n\nFull documentation: https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/ltx-talk/ltx-talk.pdf\nFor a broader discussion of accessible LaTeX slides, see David Eppstein’s post Making Accessible LaTeX talk slides.",
+    "text": "I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using \\( .. \\) $ or \\[ .. \\]), it does not need any LaTeX.\n\nEnter the text directly in the Canvas editor.\n\n\n\n\nThere are basically two options:\n\nPrepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX. \nUse LaTeXML to produce an html file and post it as a Page on Canvas.\n\n\n\n\n\nUse ltx-talk instead of Beamer.\n\n\n\n\nYou can try one of the modern, powerful, and versatile publishing frameworks, such as:\n\nPreText \nQuarto",
     "crumbs": [
-      "Slides"
+      "Workflows"
     ]
   },
   {
-    "objectID": "slides.html#installation",
-    "href": "slides.html#installation",
-    "title": "Slides",
-    "section": "Installation",
-    "text": "Installation\nltx-talk is distributed via CTAN and is included in TeX Live and MiKTeX.\nTeX Live / MacTeX:\ntlmgr install ltx-talk\nMiKTeX: install via the MiKTeX Console or on-the-fly when the package is first used.\n\n\n\n\n\n\nltx-talk requires LuaLaTeX. It will not compile with pdfLaTeX or XeLaTeX. Remember to set your editor or build tool to use LuaLaTeX (see the companion guide Installing and Using LuaLaTeX).",
-    "crumbs": [
-      "Slides"
-    ]
-  },
-  {
-    "objectID": "slides.html#minimal-document-structure",
-    "href": "slides.html#minimal-document-structure",
-    "title": "Slides",
-    "section": "Minimal Document Structure",
-    "text": "Minimal Document Structure\nA minimal ltx-talk presentation looks like this:\n\\DocumentMetadata{\n    tagging=on,\n    pdfstandard=ua-2,\n    lang=en,\n    tagging-setup = {math/setup=mathml-SE}\n}\n\n\\documentclass{ltx-talk}\n\n\\usepackage{fontspec}   % OpenType fonts — replaces inputenc/fontenc\n\n\\title{My Accessible Presentation}\n\\author{Author Name}\n\\date{\\today}\n\n\\begin{document}\n\n\\begin{frame}\n  \\maketitle\n\\end{frame}\n\n\\begin{frame}{Introduction}\n  \\begin{itemize}\n    \\item First point\n    \\item Second point\n  \\end{itemize}\n\\end{frame}\n\n\\end{document}\nCompile with:\nlualatex presentation.tex\n\nActivate tagging\nTo create a tagged pdf with enhanced accessibility features, add the necessary preamble at the top of the document:\n\\DocumentMetadata{\n    tagging=on,\n    pdfstandard=ua-2,\n    lang=en,\n    tagging-setup = {math/setup=mathml-SE}\n}\n\\tagpdfsetup{math/alt/use} % This line is only to force Canvas Ally compliance. \n% It does NOT improve accessibility.\n\n\nAdjust headings level (Canvas Ally)\nThe Canvas Ally checker might complain that\n\n“The headings in this PDF do not begin at level 1.”\n\nIn this case, add\n\\AtBeginDocument{\\tagpdfsetup{role/new-tag=frametitle/H1}}\nbefore \\documentclass.",
-    "crumbs": [
-      "Slides"
-    ]
-  },
-  {
-    "objectID": "slides.html#what-changes-for-beamer-users",
-    "href": "slides.html#what-changes-for-beamer-users",
-    "title": "Slides",
-    "section": "What Changes for Beamer Users",
-    "text": "What Changes for Beamer Users\n\nThe Document Class\n% Before (Beamer)\n\\documentclass[aspectratio=169]{beamer}\n\n% After (ltx-talk)\n\\documentclass{ltx-talk}\nOptions such as aspectratio are passed the same way. Check the ltx-talk documentation for the full list of supported class options.\n\n\nPreamble: Fonts and Encoding\nWith Beamer + pdfLaTeX, a typical preamble includes:\n\\usepackage[T1]{fontenc}\n\\usepackage[utf8]{inputenc}\nWith ltx-talk + LuaLaTeX these are not needed and should be removed. Use fontspec instead to select fonts:\n\\usepackage{fontspec}\n\\setmainfont{Latin Modern Sans}  % or any OpenType/TrueType font\n\n\nTitle Slide: Use \\maketitle\n% Before (Beamer)\n\\begin{frame}\n    \\titlepage\n\\end{frame}\n\n% After (ltx-talk)\n\\begin{frame}\n    \\maketitle\n\\end{frame}\n\n\nSlides: frame Works as Before\nThe frame environment is kept intentionally compatible:\n% Works the same in ltx-talk\n\\begin{frame}{Slide Title}\n  Content here.\n\\end{frame}\nor alternatively\n\\begin{frame}\n  \\frametitle{Slide Title}\n\n  Content here.\n\\end{frame}\nShort-title and fragile options are also supported:\n\\begin{frame}[fragile]{Code Example}\n  \\begin{verbatim}\n    print(\"hello\")\n  \\end{verbatim}\n\\end{frame}\n\n\nOverlays and Pauses\nBasic overlay commands work:\n\\begin{frame}{Step by Step}\n  \\begin{itemize}\n    \\item&lt;1-&gt; Always visible\n    \\item&lt;2-&gt; Appears on step 2\n    \\item&lt;3-&gt; Appears on step 3\n  \\end{itemize}\n\\end{frame}\n\n\n\n\n\n\nComplex Beamer overlay specifications (e.g., \\only, \\alt, \\temporal) may have limited or different support in ltx-talk. Consult the documentation and test your document carefully when migrating.\n\n\n\n\n\nThemes\nltx-talk has its own theming system, separate from Beamer themes. Beamer theme commands (\\usetheme, \\usecolortheme, etc.) do not work. Use ltx-talk’s own options instead:\n\\documentclass[theme=...]{ltx-talk}\nSee the package documentation for available themes and customization options.\n\n\nBlocks\nStandard Beamer block environments are available:\n\\begin{block}{Definition}\n  A graph is a set of vertices and edges.\n\\end{block}\n\n\\begin{alertblock}{Warning}\n  This approach has known limitations.\n\\end{alertblock}\n\n\\begin{exampleblock}{Example}\n  Consider the complete graph $K_5$.\n\\end{exampleblock}\n\n\nWhat to Remove from Your Beamer Preamble\nWhen migrating, remove or replace these common Beamer-specific commands:\n\n\n\nRemove\nReason\n\n\n\n\n\\usetheme{...}\nNot applicable; use ltx-talk theme options\n\n\n\\usecolortheme{...}\nNot applicable\n\n\n\\usefonttheme{...}\nNot applicable\n\n\n\\usepackage[T1]{fontenc}\nReplaced by fontspec + LuaLaTeX\n\n\n\\usepackage[utf8]{inputenc}\nNot needed with LuaLaTeX\n\n\n\\setbeamertemplate{...}\nNot applicable\n\n\n\\setbeamercolor{...}\nNot applicable",
-    "crumbs": [
-      "Slides"
-    ]
-  },
-  {
-    "objectID": "slides.html#summary",
-    "href": "slides.html#summary",
-    "title": "Slides",
-    "section": "Summary",
-    "text": "Summary\n\n\n\nTask\nBeamer\nltx-talk\n\n\n\n\nEngine\npdfLaTeX or LuaLaTeX\nLuaLaTeX only\n\n\nTagged PDF\n✗\n✓\n\n\nframe environment\n✓\n✓\n\n\nBeamer themes\n✓\n✗ (own system)\n\n\nfontenc / inputenc\nneeded (pdfLaTeX)\nnot needed\n\n\nBasic overlays\n✓\n✓ (check complex cases)\n\n\nBlocks\n✓\n✓\n\n\n\nMigrating from Beamer to ltx-talk is straightforward for most presentations: change the document class, remove the encoding packages and Beamer theme commands, add fontspec, and recompile with LuaLaTeX. The payoff is a PDF that is accessible by design.",
-    "crumbs": [
-      "Slides"
-    ]
-  },
-  {
-    "objectID": "latexml.html",
-    "href": "latexml.html",
-    "title": "Using LaTeXML to create Canvas pages",
+    "objectID": "workflows.html#i-just-want-to-get-some-quick-info-into-canvas.",
+    "href": "workflows.html#i-just-want-to-get-some-quick-info-into-canvas.",
+    "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "HTML files currently offer the best accessibility features.\nPlease follow the instructions to install LaTeXML. Depending on your system, you may need to pre-install something first.\n\n\nFlowchart:\n\n\n\n\n\nflowchart LR\n    A(*.tex File) --&gt; |LaTeXML| B(*.html)\n    B --&gt; |upload| C(Canvas Files)\n    C --&gt; |embed| D(Publish Canvas Page)\n    B --&gt; |copy-paste| D\n\n\n\n\n\n\n\n\n\nTo convert example_1.tex to an accessible HTML file, run the following command in a terminal\nlatexmlc example_1.tex --dest=example_1.html\nA message will be printed, listing possible failures in the conversion. Here’s a list of known failures and some pre-conversion suggestions to better prepare tex file. See also examples for things that are known to work well.\nIt will always creates a usable example_1.html, alongside two more css-file, LaTeXML.css and ltx-article.css, and a log file. You may open the HTML file with a browswer to see if everything is correctly formatted.\n\n\n\nThere are two methods of creating a Canvas Page.\n\n\nInstructions:\n\nOpen the HTML file in a text editor\nSelect everything and copy.\nGo to the canvas course page, and create a New Page under the Page tab.\nClick the &lt;/&gt; icon to switch to HTML Editor and paste the contents there. (See the figure below.)\nYou may save the page to preview and switch back to the Canvas’s Rice Content Editor to fix formatting issues and to add links to files and images.\n\n\n\n\nFigure 1: HTML Editor in Canvas Page\n\n\n\n\n\n\n\n\n\nPros:\n\nSimple\nEasier for future edits\n\nCons:\n\nLinks to files and images (e.g. \\includegraphics) need to be manually fixed\n\n\n\n\n\n\n\n\nThis is a workaround to have HTML rendered by the CSS files created by LaTeXML and to have images rendered automatically,\nInstructions:\n\nGo to the canvas course page, and create a New Page under the Page tab.\nClick the &lt;/&gt; icon to switch to HTML Editor (See Figure 1) and paste the following\n&lt;p&gt;&lt;iframe src=\"LINK_TO_BE_ADDED\" width=\"100%\" height=\"1000\" &gt;&lt;/iframe&gt;&lt;/p&gt;\nUpload the HTML file, CSS files, images to a folder on canvas\n\n\n\n\nFigure 2: Canvas Files Page\n\n\n\nClick on the HTML file to preview\nOn the top-right corner, right-click the download icon to copy the download link (see Figure 3).\n\n\n\nFigure 3: Copy Download Link\n\n\nA download link typically looks like this (this is just an example, not a working link):\nhttps://psu.instructure.com/files/123456789/download?download_frd=1&verifier=abc123123ABCABC\nPaste everything in the link up to and including ? to iframe in the HTML Editor of the canvas page. It should appear as\n&lt;p&gt;&lt;iframe src=\"https://psu.instructure.com/files/123456789/download?\" width=\"100%\" height=\"1000\" &gt;&lt;/iframe&gt;&lt;/p&gt;\nSave to preview the Canvas Page. You may adjust the height of the iframe box to avoid a scroll bar on the box.\n\n\n\n\n\n\n\n\nPros:\n\nStyle consistent with tex-pdf\nImage links work automatically\n\nCons:\n\nThis is only a workaround to embed html in Canvas Page.\nHTML also can be previewed directly in Files.",
+    "text": "I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using \\( .. \\) $ or \\[ .. \\]), it does not need any LaTeX.\n\nEnter the text directly in the Canvas editor.",
     "crumbs": [
-      "Using LaTeXML"
+      "Workflows"
     ]
   },
   {
-    "objectID": "latexml.html#workflow",
-    "href": "latexml.html#workflow",
-    "title": "Using LaTeXML to create Canvas pages",
+    "objectID": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-on-canvas-or-other-sites.",
+    "href": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-on-canvas-or-other-sites.",
+    "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "Flowchart:\n\n\n\n\n\nflowchart LR\n    A(*.tex File) --&gt; |LaTeXML| B(*.html)\n    B --&gt; |upload| C(Canvas Files)\n    C --&gt; |embed| D(Publish Canvas Page)\n    B --&gt; |copy-paste| D",
+    "text": "There are basically two options:\n\nPrepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX. \nUse LaTeXML to produce an html file and post it as a Page on Canvas.",
     "crumbs": [
-      "Using LaTeXML"
+      "Workflows"
     ]
   },
   {
-    "objectID": "latexml.html#step-1.-conversion-to-html-via-latexml",
-    "href": "latexml.html#step-1.-conversion-to-html-via-latexml",
-    "title": "Using LaTeXML to create Canvas pages",
+    "objectID": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-on-canvas-or-other-sites.",
+    "href": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-on-canvas-or-other-sites.",
+    "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "To convert example_1.tex to an accessible HTML file, run the following command in a terminal\nlatexmlc example_1.tex --dest=example_1.html\nA message will be printed, listing possible failures in the conversion. Here’s a list of known failures and some pre-conversion suggestions to better prepare tex file. See also examples for things that are known to work well.\nIt will always creates a usable example_1.html, alongside two more css-file, LaTeXML.css and ltx-article.css, and a log file. You may open the HTML file with a browswer to see if everything is correctly formatted.",
+    "text": "Use ltx-talk instead of Beamer.",
     "crumbs": [
-      "Using LaTeXML"
+      "Workflows"
     ]
   },
   {
-    "objectID": "latexml.html#step-2-add-to-canvas",
-    "href": "latexml.html#step-2-add-to-canvas",
-    "title": "Using LaTeXML to create Canvas pages",
+    "objectID": "workflows.html#i-have-an-extensive-set-of-lecture-notes-and-would-like-to-turn-them-into-an-interactive-ebook-hosted-on-the-web.",
+    "href": "workflows.html#i-have-an-extensive-set-of-lecture-notes-and-would-like-to-turn-them-into-an-interactive-ebook-hosted-on-the-web.",
+    "title": "Workflows to Produce Accessible Math Documents",
     "section": "",
-    "text": "There are two methods of creating a Canvas Page.\n\n\nInstructions:\n\nOpen the HTML file in a text editor\nSelect everything and copy.\nGo to the canvas course page, and create a New Page under the Page tab.\nClick the &lt;/&gt; icon to switch to HTML Editor and paste the contents there. (See the figure below.)\nYou may save the page to preview and switch back to the Canvas’s Rice Content Editor to fix formatting issues and to add links to files and images.\n\n\n\n\nFigure 1: HTML Editor in Canvas Page\n\n\n\n\n\n\n\n\n\nPros:\n\nSimple\nEasier for future edits\n\nCons:\n\nLinks to files and images (e.g. \\includegraphics) need to be manually fixed\n\n\n\n\n\n\n\n\nThis is a workaround to have HTML rendered by the CSS files created by LaTeXML and to have images rendered automatically,\nInstructions:\n\nGo to the canvas course page, and create a New Page under the Page tab.\nClick the &lt;/&gt; icon to switch to HTML Editor (See Figure 1) and paste the following\n&lt;p&gt;&lt;iframe src=\"LINK_TO_BE_ADDED\" width=\"100%\" height=\"1000\" &gt;&lt;/iframe&gt;&lt;/p&gt;\nUpload the HTML file, CSS files, images to a folder on canvas\n\n\n\n\nFigure 2: Canvas Files Page\n\n\n\nClick on the HTML file to preview\nOn the top-right corner, right-click the download icon to copy the download link (see Figure 3).\n\n\n\nFigure 3: Copy Download Link\n\n\nA download link typically looks like this (this is just an example, not a working link):\nhttps://psu.instructure.com/files/123456789/download?download_frd=1&verifier=abc123123ABCABC\nPaste everything in the link up to and including ? to iframe in the HTML Editor of the canvas page. It should appear as\n&lt;p&gt;&lt;iframe src=\"https://psu.instructure.com/files/123456789/download?\" width=\"100%\" height=\"1000\" &gt;&lt;/iframe&gt;&lt;/p&gt;\nSave to preview the Canvas Page. You may adjust the height of the iframe box to avoid a scroll bar on the box.\n\n\n\n\n\n\n\n\nPros:\n\nStyle consistent with tex-pdf\nImage links work automatically\n\nCons:\n\nThis is only a workaround to embed html in Canvas Page.\nHTML also can be previewed directly in Files.",
+    "text": "You can try one of the modern, powerful, and versatile publishing frameworks, such as:\n\nPreText \nQuarto",
     "crumbs": [
-      "Using LaTeXML"
+      "Workflows"
     ]
   },
   {
@@ -330,133 +300,203 @@
     ]
   },
   {
-    "objectID": "workflows.html",
-    "href": "workflows.html",
-    "title": "Workflows to Produce Accessible Math Documents",
+    "objectID": "latexml.html",
+    "href": "latexml.html",
+    "title": "Using LaTeXML to create Canvas pages",
     "section": "",
-    "text": "I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using \\( .. \\) $ or \\[ .. \\]), it does not need any LaTeX.\n\nEnter the text directly in the Canvas editor.\n\n\n\n\nThere are basically two options:\n\nPrepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX. \nUse LaTeXML to produce an html file and post it as a Page on Canvas.\n\n\n\n\n\nUse ltx-talk instead of Beamer.\n\n\n\n\nYou can try one of the modern, powerful, and versatile publishing frameworks, such as:\n\nPreText \nQuarto",
+    "text": "HTML files currently offer the best accessibility features.\nPlease follow the instructions to install LaTeXML. Depending on your system, you may need to pre-install something first.\n\n\nFlowchart:\n\n\n\n\n\nflowchart LR\n    A(*.tex File) --&gt; |LaTeXML| B(*.html)\n    B --&gt; |upload| C(Canvas Files)\n    C --&gt; |embed| D(Publish Canvas Page)\n    B --&gt; |copy-paste| D\n\n\n\n\n\n\n\n\n\nTo convert example_1.tex to an accessible HTML file, run the following command in a terminal\nlatexmlc example_1.tex --dest=example_1.html\nA message will be printed, listing possible failures in the conversion. Here’s a list of known failures and some pre-conversion suggestions to better prepare tex file. See also examples for things that are known to work well.\nIt will always creates a usable example_1.html, alongside two more css-file, LaTeXML.css and ltx-article.css, and a log file. You may open the HTML file with a browswer to see if everything is correctly formatted.\n\n\n\nThere are two methods of creating a Canvas Page.\n\n\nInstructions:\n\nOpen the HTML file in a text editor\nSelect everything and copy.\nGo to the canvas course page, and create a New Page under the Page tab.\nClick the &lt;/&gt; icon to switch to HTML Editor and paste the contents there. (See the figure below.)\nYou may save the page to preview and switch back to the Canvas’s Rice Content Editor to fix formatting issues and to add links to files and images.\n\n\n\n\nFigure 1: HTML Editor in Canvas Page\n\n\n\n\n\n\n\n\n\nPros:\n\nSimple\nEasier for future edits\n\nCons:\n\nLinks to files and images (e.g. \\includegraphics) need to be manually fixed\n\n\n\n\n\n\n\n\nThis is a workaround to have HTML rendered by the CSS files created by LaTeXML and to have images rendered automatically,\nInstructions:\n\nGo to the canvas course page, and create a New Page under the Page tab.\nClick the &lt;/&gt; icon to switch to HTML Editor (See Figure 1) and paste the following\n&lt;p&gt;&lt;iframe src=\"LINK_TO_BE_ADDED\" width=\"100%\" height=\"1000\" &gt;&lt;/iframe&gt;&lt;/p&gt;\nUpload the HTML file, CSS files, images to a folder on canvas\n\n\n\n\nFigure 2: Canvas Files Page\n\n\n\nClick on the HTML file to preview\nOn the top-right corner, right-click the download icon to copy the download link (see Figure 3).\n\n\n\nFigure 3: Copy Download Link\n\n\nA download link typically looks like this (this is just an example, not a working link):\nhttps://psu.instructure.com/files/123456789/download?download_frd=1&verifier=abc123123ABCABC\nPaste everything in the link up to and including ? to iframe in the HTML Editor of the canvas page. It should appear as\n&lt;p&gt;&lt;iframe src=\"https://psu.instructure.com/files/123456789/download?\" width=\"100%\" height=\"1000\" &gt;&lt;/iframe&gt;&lt;/p&gt;\nSave to preview the Canvas Page. You may adjust the height of the iframe box to avoid a scroll bar on the box.\n\n\n\n\n\n\n\n\nPros:\n\nStyle consistent with tex-pdf\nImage links work automatically\n\nCons:\n\nThis is only a workaround to embed html in Canvas Page.\nHTML also can be previewed directly in Files.",
     "crumbs": [
-      "Workflows"
+      "Using LaTeXML"
     ]
   },
   {
-    "objectID": "workflows.html#i-just-want-to-get-some-quick-info-into-canvas.",
-    "href": "workflows.html#i-just-want-to-get-some-quick-info-into-canvas.",
-    "title": "Workflows to Produce Accessible Math Documents",
+    "objectID": "latexml.html#workflow",
+    "href": "latexml.html#workflow",
+    "title": "Using LaTeXML to create Canvas pages",
     "section": "",
-    "text": "I have some short math content (e.g. solution to a homework problem) that I would like to get into Canvas, maybe as an announcement. Other than simple math formatting for formulas (using \\( .. \\) $ or \\[ .. \\]), it does not need any LaTeX.\n\nEnter the text directly in the Canvas editor.",
+    "text": "Flowchart:\n\n\n\n\n\nflowchart LR\n    A(*.tex File) --&gt; |LaTeXML| B(*.html)\n    B --&gt; |upload| C(Canvas Files)\n    C --&gt; |embed| D(Publish Canvas Page)\n    B --&gt; |copy-paste| D",
     "crumbs": [
-      "Workflows"
+      "Using LaTeXML"
     ]
   },
   {
-    "objectID": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-on-canvas-or-other-sites.",
-    "href": "workflows.html#i-have-latex-files-that-i-compile-as-pdfs-and-post-on-canvas-or-other-sites.",
-    "title": "Workflows to Produce Accessible Math Documents",
+    "objectID": "latexml.html#step-1.-conversion-to-html-via-latexml",
+    "href": "latexml.html#step-1.-conversion-to-html-via-latexml",
+    "title": "Using LaTeXML to create Canvas pages",
     "section": "",
-    "text": "There are basically two options:\n\nPrepare your LaTeX source for tagging and produce a tagged PDF using LuaLaTeX. \nUse LaTeXML to produce an html file and post it as a Page on Canvas.",
+    "text": "To convert example_1.tex to an accessible HTML file, run the following command in a terminal\nlatexmlc example_1.tex --dest=example_1.html\nA message will be printed, listing possible failures in the conversion. Here’s a list of known failures and some pre-conversion suggestions to better prepare tex file. See also examples for things that are known to work well.\nIt will always creates a usable example_1.html, alongside two more css-file, LaTeXML.css and ltx-article.css, and a log file. You may open the HTML file with a browswer to see if everything is correctly formatted.",
     "crumbs": [
-      "Workflows"
+      "Using LaTeXML"
     ]
   },
   {
-    "objectID": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-on-canvas-or-other-sites.",
-    "href": "workflows.html#i-have-beamer-slides-that-i-use-for-lectures-and-also-post-on-canvas-or-other-sites.",
-    "title": "Workflows to Produce Accessible Math Documents",
+    "objectID": "latexml.html#step-2-add-to-canvas",
+    "href": "latexml.html#step-2-add-to-canvas",
+    "title": "Using LaTeXML to create Canvas pages",
     "section": "",
-    "text": "Use ltx-talk instead of Beamer.",
+    "text": "There are two methods of creating a Canvas Page.\n\n\nInstructions:\n\nOpen the HTML file in a text editor\nSelect everything and copy.\nGo to the canvas course page, and create a New Page under the Page tab.\nClick the &lt;/&gt; icon to switch to HTML Editor and paste the contents there. (See the figure below.)\nYou may save the page to preview and switch back to the Canvas’s Rice Content Editor to fix formatting issues and to add links to files and images.\n\n\n\n\nFigure 1: HTML Editor in Canvas Page\n\n\n\n\n\n\n\n\n\nPros:\n\nSimple\nEasier for future edits\n\nCons:\n\nLinks to files and images (e.g. \\includegraphics) need to be manually fixed\n\n\n\n\n\n\n\n\nThis is a workaround to have HTML rendered by the CSS files created by LaTeXML and to have images rendered automatically,\nInstructions:\n\nGo to the canvas course page, and create a New Page under the Page tab.\nClick the &lt;/&gt; icon to switch to HTML Editor (See Figure 1) and paste the following\n&lt;p&gt;&lt;iframe src=\"LINK_TO_BE_ADDED\" width=\"100%\" height=\"1000\" &gt;&lt;/iframe&gt;&lt;/p&gt;\nUpload the HTML file, CSS files, images to a folder on canvas\n\n\n\n\nFigure 2: Canvas Files Page\n\n\n\nClick on the HTML file to preview\nOn the top-right corner, right-click the download icon to copy the download link (see Figure 3).\n\n\n\nFigure 3: Copy Download Link\n\n\nA download link typically looks like this (this is just an example, not a working link):\nhttps://psu.instructure.com/files/123456789/download?download_frd=1&verifier=abc123123ABCABC\nPaste everything in the link up to and including ? to iframe in the HTML Editor of the canvas page. It should appear as\n&lt;p&gt;&lt;iframe src=\"https://psu.instructure.com/files/123456789/download?\" width=\"100%\" height=\"1000\" &gt;&lt;/iframe&gt;&lt;/p&gt;\nSave to preview the Canvas Page. You may adjust the height of the iframe box to avoid a scroll bar on the box.\n\n\n\n\n\n\n\n\nPros:\n\nStyle consistent with tex-pdf\nImage links work automatically\n\nCons:\n\nThis is only a workaround to embed html in Canvas Page.\nHTML also can be previewed directly in Files.",
     "crumbs": [
-      "Workflows"
+      "Using LaTeXML"
     ]
   },
   {
-    "objectID": "workflows.html#i-have-an-extensive-set-of-lecture-notes-and-would-like-to-turn-them-into-an-interactive-ebook-hosted-on-the-web.",
-    "href": "workflows.html#i-have-an-extensive-set-of-lecture-notes-and-would-like-to-turn-them-into-an-interactive-ebook-hosted-on-the-web.",
-    "title": "Workflows to Produce Accessible Math Documents",
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Slides",
     "section": "",
-    "text": "You can try one of the modern, powerful, and versatile publishing frameworks, such as:\n\nPreText \nQuarto",
+    "text": "Beamer is the de-facto standard for LaTeX presentations, but it has a fundamental accessibility problem: it produces PDFs that are not tagged. An untagged PDF cannot be navigated by screen readers, fails automated accessibility checks, and cannot reflow for low-vision users.\nltx-talk is a modern presentation document class built on the LaTeX PDF tagging project. It produces properly tagged, accessible PDFs while keeping a syntax that Beamer users will find familiar. It requires LuaLaTeX.\n\n\n\n\n\n\nFull documentation: https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/ltx-talk/ltx-talk.pdf\nFor a broader discussion of accessible LaTeX slides, see David Eppstein’s post Making Accessible LaTeX talk slides.",
     "crumbs": [
-      "Workflows"
+      "Slides"
     ]
   },
   {
-    "objectID": "alt-text.html",
-    "href": "alt-text.html",
-    "title": "ALT Text",
+    "objectID": "slides.html#from-beamer-to-ltx-talk",
+    "href": "slides.html#from-beamer-to-ltx-talk",
+    "title": "Slides",
     "section": "",
-    "text": "Every image needs to have an ALT text description. This needs to be more than just a caption like “Graph of the function \\(f(x)\\)”, but rather a few descriptive sentences that convey the meaning or content of the image, not just its appearance.\nThe details, of course, may also depend on what the image is used for. Images in homework assignments may need descriptions different from those used in lecture notes.\n\n\n\n\n\n\nExample\n\n\n\n\nSee this page.\nHere, the ALT text is given in a separate structural element (the “Long Text Description” dropdown), but there are other ways to integrate these in your document - for example, when using \\includegraphics\n\n\n\n\nIdeally, you write a long description for each of your images yourself. This gives you the best control over accuracy and what information you would like to convey. But if you have a large number of images, this may not be practicable in the short run.\nAI bots have gotten much better at producing image descriptions recently. You can upload your image in any format (pdf, png, jpg, etc.) and prompt it to produce a text descrition:\n\"Generate a long description of the image for accessibility.\"\nIn many cases, this will even work if your image is generated via code, for example using tkiz. In this case, paste the tikz code instead of the graphics file.\n\n\n\n\n\n\nImportant\n\n\n\nCheck AI-generated text for accuracy.",
+    "text": "Beamer is the de-facto standard for LaTeX presentations, but it has a fundamental accessibility problem: it produces PDFs that are not tagged. An untagged PDF cannot be navigated by screen readers, fails automated accessibility checks, and cannot reflow for low-vision users.\nltx-talk is a modern presentation document class built on the LaTeX PDF tagging project. It produces properly tagged, accessible PDFs while keeping a syntax that Beamer users will find familiar. It requires LuaLaTeX.\n\n\n\n\n\n\nFull documentation: https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/ltx-talk/ltx-talk.pdf\nFor a broader discussion of accessible LaTeX slides, see David Eppstein’s post Making Accessible LaTeX talk slides.",
     "crumbs": [
-      "ALT Text"
+      "Slides"
     ]
   },
   {
-    "objectID": "alt-text.html#producing-alt-text",
-    "href": "alt-text.html#producing-alt-text",
-    "title": "ALT Text",
+    "objectID": "slides.html#installation",
+    "href": "slides.html#installation",
+    "title": "Slides",
+    "section": "Installation",
+    "text": "Installation\nltx-talk is distributed via CTAN and is included in TeX Live and MiKTeX.\nTeX Live / MacTeX:\ntlmgr install ltx-talk\nMiKTeX: install via the MiKTeX Console or on-the-fly when the package is first used.\n\n\n\n\n\n\nltx-talk requires LuaLaTeX. It will not compile with pdfLaTeX or XeLaTeX. Remember to set your editor or build tool to use LuaLaTeX (see the companion guide Installing and Using LuaLaTeX).",
+    "crumbs": [
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "slides.html#minimal-document-structure",
+    "href": "slides.html#minimal-document-structure",
+    "title": "Slides",
+    "section": "Minimal Document Structure",
+    "text": "Minimal Document Structure\nA minimal ltx-talk presentation looks like this:\n\\DocumentMetadata{\n    tagging=on,\n    pdfstandard=ua-2,\n    lang=en,\n    tagging-setup = {math/setup=mathml-SE}\n}\n\n\\documentclass{ltx-talk}\n\n\\usepackage{fontspec}   % OpenType fonts — replaces inputenc/fontenc\n\n\\title{My Accessible Presentation}\n\\author{Author Name}\n\\date{\\today}\n\n\\begin{document}\n\n\\begin{frame}\n  \\maketitle\n\\end{frame}\n\n\\begin{frame}{Introduction}\n  \\begin{itemize}\n    \\item First point\n    \\item Second point\n  \\end{itemize}\n\\end{frame}\n\n\\end{document}\nCompile with:\nlualatex presentation.tex\n\nActivate tagging\nTo create a tagged pdf with enhanced accessibility features, add the necessary preamble at the top of the document:\n\\DocumentMetadata{\n    tagging=on,\n    pdfstandard=ua-2,\n    lang=en,\n    tagging-setup = {math/setup=mathml-SE}\n}\n\\tagpdfsetup{math/alt/use} % This line is only to force Canvas Ally compliance. \n% It does NOT improve accessibility.\n\n\nAdjust headings level (Canvas Ally)\nThe Canvas Ally checker might complain that\n\n“The headings in this PDF do not begin at level 1.”\n\nIn this case, add\n\\AtBeginDocument{\\tagpdfsetup{role/new-tag=frametitle/H1}}\nbefore \\documentclass.",
+    "crumbs": [
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "slides.html#what-changes-for-beamer-users",
+    "href": "slides.html#what-changes-for-beamer-users",
+    "title": "Slides",
+    "section": "What Changes for Beamer Users",
+    "text": "What Changes for Beamer Users\n\nThe Document Class\n% Before (Beamer)\n\\documentclass[aspectratio=169]{beamer}\n\n% After (ltx-talk)\n\\documentclass{ltx-talk}\nOptions such as aspectratio are passed the same way. Check the ltx-talk documentation for the full list of supported class options.\n\n\nPreamble: Fonts and Encoding\nWith Beamer + pdfLaTeX, a typical preamble includes:\n\\usepackage[T1]{fontenc}\n\\usepackage[utf8]{inputenc}\nWith ltx-talk + LuaLaTeX these are not needed and should be removed. Use fontspec instead to select fonts:\n\\usepackage{fontspec}\n\\setmainfont{Latin Modern Sans}  % or any OpenType/TrueType font\n\n\nTitle Slide: Use \\maketitle\n% Before (Beamer)\n\\begin{frame}\n    \\titlepage\n\\end{frame}\n\n% After (ltx-talk)\n\\begin{frame}\n    \\maketitle\n\\end{frame}\n\n\nSlides: frame Works as Before\nThe frame environment is kept intentionally compatible:\n% Works the same in ltx-talk\n\\begin{frame}{Slide Title}\n  Content here.\n\\end{frame}\nor alternatively\n\\begin{frame}\n  \\frametitle{Slide Title}\n\n  Content here.\n\\end{frame}\nShort-title and fragile options are also supported:\n\\begin{frame}[fragile]{Code Example}\n  \\begin{verbatim}\n    print(\"hello\")\n  \\end{verbatim}\n\\end{frame}\n\n\nOverlays and Pauses\nBasic overlay commands work:\n\\begin{frame}{Step by Step}\n  \\begin{itemize}\n    \\item&lt;1-&gt; Always visible\n    \\item&lt;2-&gt; Appears on step 2\n    \\item&lt;3-&gt; Appears on step 3\n  \\end{itemize}\n\\end{frame}\n\n\n\n\n\n\nComplex Beamer overlay specifications (e.g., \\only, \\alt, \\temporal) may have limited or different support in ltx-talk. Consult the documentation and test your document carefully when migrating.\n\n\n\n\n\nThemes\nltx-talk has its own theming system, separate from Beamer themes. Beamer theme commands (\\usetheme, \\usecolortheme, etc.) do not work. Use ltx-talk’s own options instead:\n\\documentclass[theme=...]{ltx-talk}\nSee the package documentation for available themes and customization options.\n\n\nBlocks\nStandard Beamer block environments are available:\n\\begin{block}{Definition}\n  A graph is a set of vertices and edges.\n\\end{block}\n\n\\begin{alertblock}{Warning}\n  This approach has known limitations.\n\\end{alertblock}\n\n\\begin{exampleblock}{Example}\n  Consider the complete graph $K_5$.\n\\end{exampleblock}\n\n\nWhat to Remove from Your Beamer Preamble\nWhen migrating, remove or replace these common Beamer-specific commands:\n\n\n\nRemove\nReason\n\n\n\n\n\\usetheme{...}\nNot applicable; use ltx-talk theme options\n\n\n\\usecolortheme{...}\nNot applicable\n\n\n\\usefonttheme{...}\nNot applicable\n\n\n\\usepackage[T1]{fontenc}\nReplaced by fontspec + LuaLaTeX\n\n\n\\usepackage[utf8]{inputenc}\nNot needed with LuaLaTeX\n\n\n\\setbeamertemplate{...}\nNot applicable\n\n\n\\setbeamercolor{...}\nNot applicable",
+    "crumbs": [
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "slides.html#summary",
+    "href": "slides.html#summary",
+    "title": "Slides",
+    "section": "Summary",
+    "text": "Summary\n\n\n\nTask\nBeamer\nltx-talk\n\n\n\n\nEngine\npdfLaTeX or LuaLaTeX\nLuaLaTeX only\n\n\nTagged PDF\n✗\n✓\n\n\nframe environment\n✓\n✓\n\n\nBeamer themes\n✓\n✗ (own system)\n\n\nfontenc / inputenc\nneeded (pdfLaTeX)\nnot needed\n\n\nBasic overlays\n✓\n✓ (check complex cases)\n\n\nBlocks\n✓\n✓\n\n\n\nMigrating from Beamer to ltx-talk is straightforward for most presentations: change the document class, remove the encoding packages and Beamer theme commands, add fontspec, and recompile with LuaLaTeX. The payoff is a PDF that is accessible by design.",
+    "crumbs": [
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Producing Accessible Documents with LaTeX",
     "section": "",
-    "text": "Ideally, you write a long description for each of your images yourself. This gives you the best control over accuracy and what information you would like to convey. But if you have a large number of images, this may not be practicable in the short run.\nAI bots have gotten much better at producing image descriptions recently. You can upload your image in any format (pdf, png, jpg, etc.) and prompt it to produce a text descrition:\n\"Generate a long description of the image for accessibility.\"\nIn many cases, this will even work if your image is generated via code, for example using tkiz. In this case, paste the tikz code instead of the graphics file.\n\n\n\n\n\n\nImportant\n\n\n\nCheck AI-generated text for accuracy.",
+    "text": "This Website aims to give brief but self-contained instructions on how to use LaTeX to produce documents with accessibility features.\nBefore delving into details on LaTeX, here are four core principles that always apply (LaTeX or not):",
     "crumbs": [
-      "ALT Text"
+      "Home"
     ]
   },
   {
-    "objectID": "lualatex-guide.html",
-    "href": "lualatex-guide.html",
-    "title": "Using LuaLaTeX",
+    "objectID": "index.html#general-principles-for-accessibility",
+    "href": "index.html#general-principles-for-accessibility",
+    "title": "Producing Accessible Documents with LaTeX",
+    "section": "General Principles for Accessibility",
+    "text": "General Principles for Accessibility\n\nWhenever possible, use structural elements to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables. If available, start from a template.\nDon’t use color as the only way to communicate information. If you are using colors, make sure to have sufficient contrast.\nPut alt text (text descriptions) on images and graphs. (More info)\nMake sure all videos you are using have accurate captions and a transcript.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#next-steps",
+    "href": "index.html#next-steps",
+    "title": "Producing Accessible Documents with LaTeX",
+    "section": "Next steps",
+    "text": "Next steps\n\nSome examples of good and bad LaTeX usage.\n\nOn the Workflows page, you can find links to instructions specific to the kind of document you want to produce.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#content-other-than-latex",
+    "href": "index.html#content-other-than-latex",
+    "title": "Producing Accessible Documents with LaTeX",
+    "section": "Content other than LaTeX",
+    "text": "Content other than LaTeX\n\nHandwritten notes\nVideo captioning, Powerpoint or Keynote slides, etc.\nYou can find many accessibility tips and workflows at these sites:\n\nGrove Center Accessibility minutes\nAccessibility@PSU",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#getting-help",
+    "href": "index.html#getting-help",
+    "title": "Producing Accessible Documents with LaTeX",
+    "section": "Getting help",
+    "text": "Getting help\nContact the Math Accessibility Team.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "general.html",
+    "href": "general.html",
+    "title": "General Principles for Accessibility",
     "section": "",
-    "text": "LuaLaTeX is a modern TeX engine that extends pdfLaTeX with the Lua scripting language. It is the recommended engine for most contemporary LaTeX projects because it supports:\n\nUnicode natively — no need for inputenc or fontenc\nOpenType and TrueType fonts via the fontspec package\nLua scripting for dynamic document generation\nFull backwards compatibility with most pdfLaTeX documents\nBetter support for complex scripts (Arabic, CJK, etc.)\n\nLuaLaTeX is bundled with all major TeX distributions (TeX Live, MiKTeX) so chances are that you already have LuaLaTeX on your computer.\n\n\n\n\n\n\nFor accessible tagging to work, you need to use a current version of LuaLaTeX. Please refer to the documentation of the TeX-distribution or IDE you are using for instructions on how to update LuaLaTeX to the latest release.",
+    "text": "Whenever possible, use structural elements to structure your document. Use built-in headings and lists instead of relying on manual formatting on documents, slides, and tables. If available, start from a template.\nDon’t use color as the only way to communicate information. If you are using colors, make sure to have sufficient contrast.\nPut alt text (text descriptions) on images and graphs. (More info)\nMake sure all videos you are using have accurate captions and a transcript.\n\n\n\n\n\n\n\n\n\n\n\nImportantBad (not using latex structure)\n\n\n\n\\texbf{1. My Section}\n\n\n\n\n\n\n\n\nTipGood (using latex structure)\n\n\n\n\\section{My Section}\n\n\\subsection*{My unnumbered Subsection}\n\n\nor\n\n\n\n\n\n\nImportantBad (not using predefined latex structure)\n\n\n\n$\\cdot$ Item 1\n$\\cdot$ Item 2\n\n\n\n\n\n\n\n\nTipGood (using predefined latex structure ‘itemize’)\n\n\n\n\\begin{itemize}\n\\item Item 1\n\\item Item 2\n\\end{itemize}\n\n\n\n\n\n\n\n\n\n\n\nImportantBad (not enough contrast)\n\n\n\n\\textcolor{red}{...}\n\\textcolor{green}{...}\n\n\n\n\n\n\n\n\nTipGood (sufficient contrast)\n\n\n\n\\textcolor{blue}{...}\n\\textcolor{teal}{...}\n\n\nGenerally, the following LaTeX colors should have sufficient contrast over white background:\n`blue`, `purple`, `teal`, `violet`, `black`, `darkgray`",
     "crumbs": [
-      "LuaLaTeX Guide"
+      "General Principles"
     ]
   },
   {
-    "objectID": "lualatex-guide.html#what-is-lualatex",
-    "href": "lualatex-guide.html#what-is-lualatex",
-    "title": "Using LuaLaTeX",
+    "objectID": "general.html#examples",
+    "href": "general.html#examples",
+    "title": "General Principles for Accessibility",
     "section": "",
-    "text": "LuaLaTeX is a modern TeX engine that extends pdfLaTeX with the Lua scripting language. It is the recommended engine for most contemporary LaTeX projects because it supports:\n\nUnicode natively — no need for inputenc or fontenc\nOpenType and TrueType fonts via the fontspec package\nLua scripting for dynamic document generation\nFull backwards compatibility with most pdfLaTeX documents\nBetter support for complex scripts (Arabic, CJK, etc.)\n\nLuaLaTeX is bundled with all major TeX distributions (TeX Live, MiKTeX) so chances are that you already have LuaLaTeX on your computer.\n\n\n\n\n\n\nFor accessible tagging to work, you need to use a current version of LuaLaTeX. Please refer to the documentation of the TeX-distribution or IDE you are using for instructions on how to update LuaLaTeX to the latest release.",
+    "text": "ImportantBad (not using latex structure)\n\n\n\n\\texbf{1. My Section}\n\n\n\n\n\n\n\n\nTipGood (using latex structure)\n\n\n\n\\section{My Section}\n\n\\subsection*{My unnumbered Subsection}\n\n\nor\n\n\n\n\n\n\nImportantBad (not using predefined latex structure)\n\n\n\n$\\cdot$ Item 1\n$\\cdot$ Item 2\n\n\n\n\n\n\n\n\nTipGood (using predefined latex structure ‘itemize’)\n\n\n\n\\begin{itemize}\n\\item Item 1\n\\item Item 2\n\\end{itemize}\n\n\n\n\n\n\n\n\n\n\n\nImportantBad (not enough contrast)\n\n\n\n\\textcolor{red}{...}\n\\textcolor{green}{...}\n\n\n\n\n\n\n\n\nTipGood (sufficient contrast)\n\n\n\n\\textcolor{blue}{...}\n\\textcolor{teal}{...}\n\n\nGenerally, the following LaTeX colors should have sufficient contrast over white background:\n`blue`, `purple`, `teal`, `violet`, `black`, `darkgray`",
     "crumbs": [
-      "LuaLaTeX Guide"
+      "General Principles"
     ]
   },
   {
-    "objectID": "lualatex-guide.html#set-lualatex-as-your-engine-in-popular-ides",
-    "href": "lualatex-guide.html#set-lualatex-as-your-engine-in-popular-ides",
-    "title": "Using LuaLaTeX",
-    "section": "Set LuaLaTeX as Your Engine in Popular IDEs",
-    "text": "Set LuaLaTeX as Your Engine in Popular IDEs\n\nTeXShop (macOS)\nTeXShop is the classic macOS LaTeX editor included with MacTeX.\nPer-document (recommended):\nAdd this magic comment at the top of your .tex file:\n% !TEX program = lualatex\nAs the default engine:\n\nOpen TeXShop → Preferences\nGo to the Engine tab\nUnder Default Command, select LuaLaTeX from the dropdown\nClick OK\n\n\n\nTeXworks (Windows, macOS, Linux)\nTeXworks is a lightweight cross-platform editor bundled with both TeX Live and MiKTeX.\nPer-document:\n% !TEX program = lualatex\nAs the default engine:\n\nGo to Edit → Preferences → Typesetting\nUnder Default program, select LuaLaTeX\nClick OK\n\n\n\nTeXstudio (Windows, macOS, Linux)\nTeXstudio is one of the most popular full-featured LaTeX editors.\nPer-document:\n% !TeX program = lualatex\nAs the default compiler:\n\nOpen Options → Configure TeXstudio\nGo to Build\nUnder Default Compiler, select LuaLaTeX from the dropdown\nClick OK\n\n\n\n\n\n\n\nTeXstudio also supports setting the bibliography tool and other build options in the same Build settings panel.\n\n\n\n\n\nOverleaf (Web-based)\nOverleaf is the leading cloud-based LaTeX editor — no installation required.\nPer-project:\n\nOpen your project\nClick the Menu button (☰) in the top-left corner\nUnder Settings → Compiler, select LuaLaTeX\nClick anywhere to close — all future compilations will use LuaLaTeX\n\nAlternatively, add the magic comment to your main .tex file:\n% !TEX program = lualatex\n\n\nVS Code with LaTeX Workshop (Windows, macOS, Linux)\nLaTeX Workshop is the most popular LaTeX extension for VS Code.\nPer-document:\n% !TEX program = lualatex\nAs the default recipe (settings.json):\nOpen Settings → Open Settings (JSON) (Ctrl+Shift+P → *“Open User Settings JSON”`) and add:\n\n\nsettings.json\n\n{\n  \"latex-workshop.latex.recipes\": [\n    {\n      \"name\": \"LuaLaTeX\",\n      \"tools\": [\"lualatex\"]\n    }\n  ],\n  \"latex-workshop.latex.tools\": [\n    {\n      \"name\": \"lualatex\",\n      \"command\": \"lualatex\",\n      \"args\": [\n        \"--shell-escape\",\n        \"--interaction=nonstopmode\",\n        \"--synctex=1\",\n        \"%DOC%\"\n      ]\n    }\n  ]\n}\n\n\n\nEmacs with AUCTeX (Windows, macOS, Linux)\nPer-document (file-local variables):\nAdd this at the bottom of your .tex file:\n%%% Local Variables:\n%%% mode: latex\n%%% TeX-engine: luatex\n%%% End:\nGlobally in your init.el:\n\n\ninit.el\n\n(setq-default TeX-engine 'luatex)\n\nDuring a session:\nUse M-x TeX-engine-set and select luatex.\n\n\nVim / Neovim with VimTeX (Windows, macOS, Linux)\nPer-document (modeline at top of file):\n% vim: set ft=tex spell spelllang=en_us:\nGlobal setting in init.vim / init.lua:\n\n\ninit.vim\n\nlet g:vimtex_compiler_latexmk_engines = {'_': '-lualatex'}\n\n\n\ninit.lua\n\nvim.g.vimtex_compiler_latexmk_engines = { _ = '-lualatex' }",
+    "objectID": "handwritten.html",
+    "href": "handwritten.html",
+    "title": "Handwritten notes",
+    "section": "",
+    "text": "ImportantEphemeral content (e.g., handwritten notes, lecture recordings, etc.):\n\n\n\n\nShort-Term Use (Single Semester) – for content that is created for one semester only and will not be reused:\n\nHandwritten Notes: Handwritten notes created using notetaking software or a document camera, converted to a PDF, and shared with students do not need to be made accessible unless you receive a formal accommodation request.\nLecture Recordings: If you record lectures and make them available to students for that semester only, machine-generated captions from Kaltura (or Zoom) are sufficient unless you receive a formal accommodation request.\n\nLong-Term Use (Multiple Semesters) – if you plan to reuse content in future sections of the course, these content items need to be made accessible:\n\nHandwritten notes: These documents need to be transcribed.\nLecture Recordings: Captions must be edited to reach 99% accuracy.",
     "crumbs": [
-      "LuaLaTeX Guide"
+      "Handwritten notes"
     ]
   },
   {
-    "objectID": "lualatex-guide.html#an-example-lualatex-document",
-    "href": "lualatex-guide.html#an-example-lualatex-document",
-    "title": "Using LuaLaTeX",
-    "section": "An Example LuaLaTeX Document",
-    "text": "An Example LuaLaTeX Document\nHere is a minimal LuaLaTeX document that you can use for testing your installation:\n\n\nhello-lualatex.tex\n\n\\documentclass{article}\n\n% LuaLaTeX-specific packages\n\\usepackage{fontspec}       % OpenType font support\n\\usepackage{luacode}        % Lua scripting in LaTeX\n\n% Set a system font (change to one available on your system)\n\\setmainfont{Latin Modern Roman}\n\n\\title{My First LuaLaTeX Document}\n\\author{Your Name}\n\\date{\\today}\n\n\\begin{document}\n\n\\maketitle\n\n\\section{Hello, LuaLaTeX!}\n\nThis document is compiled with LuaLaTeX.\nIt supports Unicode natively: café, naïve, Ångström, 日本語.\n\n\\section{Lua Scripting}\n\nThe answer to life is\n\\directlua{tex.sprint(6 * 7)}.\n\n\\end{document}",
+    "objectID": "handwritten.html#penn-state-it-guidelines",
+    "href": "handwritten.html#penn-state-it-guidelines",
+    "title": "Handwritten notes",
+    "section": "",
+    "text": "ImportantEphemeral content (e.g., handwritten notes, lecture recordings, etc.):\n\n\n\n\nShort-Term Use (Single Semester) – for content that is created for one semester only and will not be reused:\n\nHandwritten Notes: Handwritten notes created using notetaking software or a document camera, converted to a PDF, and shared with students do not need to be made accessible unless you receive a formal accommodation request.\nLecture Recordings: If you record lectures and make them available to students for that semester only, machine-generated captions from Kaltura (or Zoom) are sufficient unless you receive a formal accommodation request.\n\nLong-Term Use (Multiple Semesters) – if you plan to reuse content in future sections of the course, these content items need to be made accessible:\n\nHandwritten notes: These documents need to be transcribed.\nLecture Recordings: Captions must be edited to reach 99% accuracy.",
     "crumbs": [
-      "LuaLaTeX Guide"
+      "Handwritten notes"
     ]
   },
   {
-    "objectID": "lualatex-guide.html#common-issues-and-fixes",
-    "href": "lualatex-guide.html#common-issues-and-fixes",
-    "title": "Using LuaLaTeX",
-    "section": "Common Issues and Fixes",
-    "text": "Common Issues and Fixes\n\n\n\n\n\n\n\n\nProblem\nCause\nFix\n\n\n\n\nlualatex: command not found\nTeX not on PATH\nAdd TeX bin dir to your PATH\n\n\nFont not found\nSystem font not installed\nInstall font or use a TeX font\n\n\n! Package fontspec Error\nUsing pdfLaTeX accidentally\nEnsure LuaLaTeX is the selected engine\n\n\nSlow compilation\nLuaLaTeX is inherently slower\nUse --draftmode for intermediate builds\n\n\nUnicode characters not rendering\nMissing font coverage\nUse a broader font like Noto or DejaVu",
+    "objectID": "handwritten.html#additional-remarks",
+    "href": "handwritten.html#additional-remarks",
+    "title": "Handwritten notes",
+    "section": "Additional Remarks",
+    "text": "Additional Remarks\nThe status of handwritten materials is nuanced. It takes time and effort to typeset handwritten notes, and additional effort to convert the typeset notes into a fully accessible format.\nHandwritten materials that will be reused in a course have to be converted to an accessible format. “Reused” obviously leaves room for interpretation: Does the material have to be exactly the same every semester to fall into this category? Use good judgement here.\n\n\n\n\n\n\nIf you find yourself posting class notes semester after semester that are essentially the same (within \\(\\varepsilon\\)), it is time to start converting them to a digitally accessible format.\n\n\n\nModern publishing systems create great-looking content while at the same time enhancing accessibility for many - your handwriting may not be as readable as you think.\nHere are a couple of examples of notes that have been converted:\n\nMath 110 (using Jupyterbook, link to source code)\nMath 557 (using Quarto, link to source code)\n\n\nScaffolded notes\nMany instructors use scaffolded notes, where part of the content is pre-formatted while the remaining part is filled in during class sessions (either by students or instructors, often handwritten on a tablet). The same basic rules apply here:\n\nIf you use the same scaffolded notes every semester and post the (unfilled) notes online, they have to be made accessible.\nFilled notes probably will differ from semester to semester and would likely fall under the “ephemeral” rule stated above.\nHowever, if you provide a “canocical” filled-in version (e.g., solutions to in-class exercises), and this does not change from semester to semester, the filled-in version has to be made accessible, too.\n\n\n\nAI use\nWe experimented with AI tools for converting handwritten material, with mixed success. In the medium term, it may become easier to convert handwritten notes using such tools. As this becomes more practical, our responsibility to convert these materials will increase, since the regulations require us to make use of available tools. At present, converting handwriting remains at the edge of current AI capabilities, and success depends on both the complexity of the material and the quality of the source.\nYou are encourged to experiment with this yourself. The launch of Penn State’s AI Studio should alleviate concerns regarding data privacy in this regard. Even if not completely accurate, the converted material may serve as a starting point for a set of lecture notes that can be used in future semesters.",
     "crumbs": [
-      "LuaLaTeX Guide"
-    ]
-  },
-  {
-    "objectID": "lualatex-guide.html#additional-resources",
-    "href": "lualatex-guide.html#additional-resources",
-    "title": "Using LuaLaTeX",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nLuaLaTeX documentation (luatex.org)\nfontspec package documentation (CTAN)\nTeX Live Guide\nLaTeX Wikibook — LuaLaTeX chapter\nOverleaf LuaLaTeX documentation",
-    "crumbs": [
-      "LuaLaTeX Guide"
+      "Handwritten notes"
     ]
   }
 ]

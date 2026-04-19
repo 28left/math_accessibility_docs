@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>latexml-doc – Producing Accessible Documents with LaTeX</title>
+<title>Handwritten notes – Producing Accessible Documents with LaTeX</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -30,16 +33,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./alt-text.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7b1b06e26e1e2798ccde3208f86b5bbd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a2a938b4dd5711f7a799c87bd16ba44c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -67,10 +71,36 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -84,9 +114,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Producing Accessible Documents with LaTeX
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./handwritten.html">Handwritten notes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -132,13 +160,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./latexcanvas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using LaTeX in the CANVAS Editor</span></a>
+ <span class="menu-text">LaTeX in Canvas</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tagged-pdf.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tagged PDFs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./latexml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using LaTeXML</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -161,8 +195,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Contact</span></a>
+  <a href="./handwritten.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Handwritten notes</span></a>
   </div>
 </li>
     </ul>
@@ -175,137 +209,100 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#forewords" id="toc-forewords" class="nav-link active" data-scroll-target="#forewords">Forewords</a></li>
-  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
+  <li><a href="#penn-state-it-guidelines" id="toc-penn-state-it-guidelines" class="nav-link active" data-scroll-target="#penn-state-it-guidelines">Penn State IT Guidelines</a></li>
+  <li><a href="#additional-remarks" id="toc-additional-remarks" class="nav-link" data-scroll-target="#additional-remarks">Additional Remarks</a>
   <ul class="collapse">
-  <li><a href="#step-1.-conversion-to-html-via-latexml" id="toc-step-1.-conversion-to-html-via-latexml" class="nav-link" data-scroll-target="#step-1.-conversion-to-html-via-latexml">Step 1. Conversion to HTML via LaTeXML</a></li>
-  <li><a href="#step-2-add-to-canvas" id="toc-step-2-add-to-canvas" class="nav-link" data-scroll-target="#step-2-add-to-canvas">Step 2: Add to Canvas</a>
-  <ul class="collapse">
-  <li><a href="#copy-paste" id="toc-copy-paste" class="nav-link" data-scroll-target="#copy-paste">Copy-Paste</a></li>
-  <li><a href="#embed-html" id="toc-embed-html" class="nav-link" data-scroll-target="#embed-html">Embed HTML</a></li>
+  <li><a href="#scaffolded-notes" id="toc-scaffolded-notes" class="nav-link" data-scroll-target="#scaffolded-notes">Scaffolded notes</a></li>
+  <li><a href="#ai-use" id="toc-ai-use" class="nav-link" data-scroll-target="#ai-use">AI use</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Handwritten notes</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="forewords" class="level1">
-<h1>Forewords</h1>
-<p>This is a guide on how to use LaTeXML to convert tex files to html files for better accessibility. Please follow <a href="https://math.nist.gov/~BMiller/LaTeXML/get.html">the instructions</a> to install LaTeXML. Based on your system, you may need to pre-install something first.</p>
-</section>
-<section id="workflow" class="level1">
-<h1>Workflow</h1>
-<p>Flowchart:</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A(*.tex File) --&gt; |LaTeXML| B(*.html)
-    B --&gt; |upload| C(Canvas Files)
-    C --&gt; |embed| D(Publish Canvas Page)
-    B --&gt; |copy-paste| D
-</pre>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="penn-state-it-guidelines" class="level2">
+<h2 class="anchored" data-anchor-id="penn-state-it-guidelines">Penn State IT Guidelines</h2>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<p></p></figure><p></p>
-</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Ephemeral content (e.g., handwritten notes, lecture recordings, etc.):
 </div>
 </div>
-<section id="step-1.-conversion-to-html-via-latexml" class="level2">
-<h2 class="anchored" data-anchor-id="step-1.-conversion-to-html-via-latexml">Step 1. Conversion to HTML via LaTeXML</h2>
-<p>To convert <code>example_1.tex</code> to an accessible HTML file, run the following command in a terminal</p>
-<pre><code>    latexmlc example_1.tex --dest=example_1.html</code></pre>
-<p>A message will be printed, listing possible failures in the conversion. Here’s a <a href="">list of known failures</a> and some <a href="">pre-conversion suggestions</a> to better prepare tex file. See also <a href="">examples</a> for things that are known to work well.</p>
-<p>It will always creates a usable <code>example_1.html</code>, alongside two more css-file, <code>LaTeXML.css</code> and <code>ltx-article.css</code>, and a log file. You may open the HTML file with a browswer to see if everything is correctly formatted.</p>
-</section>
-<section id="step-2-add-to-canvas" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-add-to-canvas">Step 2: Add to Canvas</h2>
-<p>There are two methods of creating a Canvas Page.</p>
-<section id="copy-paste" class="level3">
-<h3 class="anchored" data-anchor-id="copy-paste">Copy-Paste</h3>
-<p><strong>Instructions</strong>:</p>
-<ol type="1">
-<li>Open the HTML file in a text editor</li>
-<li>Select everything and copy.</li>
-<li>Go to the canvas course page, and create a New Page under the Page tab.</li>
-<li>Click the <code>&lt;/&gt;</code> icon to switch to HTML Editor and paste the contents there. (See the figure below.)</li>
-<li>You may save the page to preview and switch back to the Canvas’s Rice Content Editor to fix formatting issues and to add links to files and images.</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig_1_canvas_html_editor.png" class="img-fluid figure-img" width="600"></p>
-<figcaption>Figure 1: HTML Editor in Canvas Page</figcaption>
-</figure>
-</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li>Pros:
+<li><p><strong>Short-Term Use (Single Semester)</strong> – for content that is created for one semester only and will not be reused:</p>
 <ul>
-<li>Simple</li>
-<li>Easier for future edits</li>
+<li><p>Handwritten Notes: Handwritten notes created using notetaking software or a document camera, converted to a PDF, and shared with students do not need to be made accessible <strong>unless you receive a formal accommodation request</strong>.</p></li>
+<li><p>Lecture Recordings: If you record lectures and make them available to students for that semester only, machine-generated captions from Kaltura (or Zoom) are sufficient <strong>unless you receive a formal accommodation request</strong>.</p></li>
 </ul></li>
-<li>Cons:
+<li><p><strong>Long-Term Use (Multiple Semesters)</strong> – if you plan to reuse content in future sections of the course, these content items need to be made accessible:</p>
 <ul>
-<li>Links to files and images (e.g.&nbsp;<code>\includegraphics</code>) need to be manually fixed</li>
+<li><p>Handwritten notes: These documents need to be transcribed.</p></li>
+<li><p>Lecture Recordings: Captions must be edited to reach 99% accuracy.</p></li>
 </ul></li>
 </ul>
+</div>
+</div>
 </section>
-<section id="embed-html" class="level3">
-<h3 class="anchored" data-anchor-id="embed-html">Embed HTML</h3>
-<p>This is a workaround to have HTML rendered by the CSS files created by LaTeXML and to have images rendered automatically,</p>
-<p><strong>Instructions</strong>:</p>
-<ol class="example" type="1">
-<li><p>Go to the canvas course page, and create a New Page under the Page tab.</p></li>
-<li><p>Click the <code>&lt;/&gt;</code> icon to switch to HTML Editor (See Figure 1) and paste the following</p>
-<pre><code>    &lt;p&gt;&lt;iframe src="LINK_TO_BE_ADDED" width="100%" height="1000" &gt;&lt;/iframe&gt;&lt;/p&gt;</code></pre></li>
-<li><p>Upload the HTML file, CSS files, images to a folder on canvas</p></li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig_2_canvas_file_page.png" class="img-fluid figure-img" width="250"></p>
-<figcaption>Figure 2: Canvas Files Page</figcaption>
-</figure>
+<section id="additional-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="additional-remarks">Additional Remarks</h2>
+<p>The status of handwritten materials is nuanced. It takes time and effort to typeset handwritten notes, and additional effort to convert the typeset notes into a fully accessible format.</p>
+<p>Handwritten materials that will be reused in a course have to be converted to an accessible format. “Reused” obviously leaves room for interpretation: Does the material have to be <em>exactly</em> the same every semester to fall into this category? Use good judgement here.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<ol start="4" class="example" type="1">
-<li>Click on the HTML file to preview</li>
-<li>On the top-right corner, right-click the download icon to copy the download link <code>https://psu.instructure.com/files/123456789/download?download_frd=1&amp;verifier=abc123123ABCABC</code> (See Figure 3)</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig_3_download_link.png" class="img-fluid figure-img" width="600"></p>
-<figcaption>Figure 3: Copy Download Link</figcaption>
-</figure>
+<div class="callout-body-container">
+<p>If you find yourself posting class notes semester after semester that are <em>essentially</em> the same (within <span class="math inline">\(\varepsilon\)</span>), it is time to start converting them to a digitally accessible format.</p>
 </div>
-<ol start="6" class="example" type="1">
-<li><p>Paste everything in the link up to and including <code>?</code> to iframe in the HTML Editor of the canvas page. It should now appear like</p>
-<pre><code>    &lt;p&gt;&lt;iframe src="https://psu.instructure.com/files/123456789/download?" width="100%" height="1000" &gt;&lt;/iframe&gt;&lt;/p&gt;</code></pre></li>
-<li><p>Save to preview the Canvas Page. You may adjust the height of the iframe box to avoid a scroll bar on the box.</p></li>
-</ol>
+</div>
+</div>
+<p>Modern publishing systems create great-looking content while at the same time enhancing accessibility for many - <strong>your handwriting may not be as readable as you think</strong>.</p>
+<p>Here are a couple of examples of notes that have been converted:</p>
 <ul>
-<li>Pros:
+<li><a href="https://28left.github.io/110jupyter/intro.html">Math 110</a> (using Jupyterbook, <a href="https://github.com/28left/110jupyter">link to source code</a>)</li>
+<li><a href="https://28left.github.io/mathlogic/">Math 557</a> (using Quarto, <a href="https://github.com/28left/mathlogic">link to source code</a>)</li>
+</ul>
+<section id="scaffolded-notes" class="level3">
+<h3 class="anchored" data-anchor-id="scaffolded-notes">Scaffolded notes</h3>
+<p>Many instructors use <em>scaffolded notes</em>, where part of the content is pre-formatted while the remaining part is filled in during class sessions (either by students or instructors, often handwritten on a tablet). The same basic rules apply here:</p>
 <ul>
-<li>Style consistent with tex-pdf</li>
-<li>Image links work automatically</li>
-</ul></li>
-<li>Cons:
-<ul>
-<li>This is only a workaround to embed html in Canvas Page.</li>
-<li>HTML also can be previewed directly in Files.</li>
-</ul></li>
+<li>If you use the same scaffolded notes every semester and post the (unfilled) notes online, they have to be made accessible.</li>
+<li>Filled notes probably will differ from semester to semester and would likely fall under the “ephemeral” rule stated above.</li>
+<li>However, if you provide a “canocical” filled-in version (e.g., solutions to in-class exercises), and this does not change from semester to semester, the filled-in version has to be made accessible, too.</li>
 </ul>
 </section>
-</section>
-</section>
-<section id="examples" class="level1">
-<h1>Examples</h1>
+<section id="ai-use" class="level3">
+<h3 class="anchored" data-anchor-id="ai-use">AI use</h3>
+<p>We experimented with AI tools for converting handwritten material, with mixed success. In the medium term, it may become easier to convert handwritten notes using such tools. As this becomes more practical, our responsibility to convert these materials will increase, since the regulations require us to make use of available tools. At present, converting handwriting remains at the edge of current AI capabilities, and success depends on both the complexity of the material and the quality of the source.</p>
+<p>You are encourged to experiment with this yourself. The launch of Penn State’s <strong>AI Studio</strong> should alleviate concerns regarding data privacy in this regard. Even if not completely accurate, the converted material may serve as a starting point for a set of lecture notes that can be used in future semesters.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -360,13 +357,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -381,7 +379,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/28left\.github\.io\/math_accessibility_docs\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -708,6 +706,15 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./alt-text.html" class="pagination-link" aria-label="ALT Text">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ALT Text</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
